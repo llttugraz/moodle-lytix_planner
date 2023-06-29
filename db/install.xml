@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/lytix/modules/planner/db" VERSION="20210823" COMMENT="XMLDB file for Moodle local/lytix/modules/planner"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="lytix_planner_events" COMMENT="Table with entries of the planner">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Corresponding course for the planner entry"/>
+        <FIELD NAME="type" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Type of planner entry"/>
+        <FIELD NAME="marker" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Marker of planner entry"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Date of planner entry"/>
+        <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Enddate"/>
+        <FIELD NAME="mgroup" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Event will be created for this group."/>
+        <FIELD NAME="title" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Title of planner entry"/>
+        <FIELD NAME="text" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Text of planner entry"/>
+        <FIELD NAME="room" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Room name or link."/>
+        <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="Planner event visiblity"/>
+        <FIELD NAME="mandatory" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="graded" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="gradeitem" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="send" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_milestone" COMMENT="Table with the information about the milestones">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Corresponding course for the milestone"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Corresponding user for the milestone"/>
+        <FIELD NAME="type" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Type of planner entry"/>
+        <FIELD NAME="marker" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Marker of milestone"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Date of planner entry"/>
+        <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="enddate of milestone"/>
+        <FIELD NAME="title" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Title of planner entry"/>
+        <FIELD NAME="text" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Text of milestone"/>
+        <FIELD NAME="moffset" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="3" SEQUENCE="false"/>
+        <FIELD NAME="moption" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="email or message or both or none"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="Is milestone completed?"/>
+        <FIELD NAME="send" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_event_comp" COMMENT="Default comment for the table, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="eventid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Id of the event."/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="Is event completed?"/>
+        <FIELD NAME="send" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="flag that indicates if a notification for this event was send to the user"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Time the event was marked completed."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_crs_settings" COMMENT="Settings per course for the notification and timeline feature.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="start_time" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="end_time" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="enable_course_notifications" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="enable_user_customization" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="types" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Saves the event types of the planner for this course."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_usr_settings" COMMENT="Settings for the planner notifications per user per course">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="enable_custom_customization" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="types" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Saves the event types of the planner for this course."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_last_report" COMMENT="Default comment for the table, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_usr_grade_rep" COMMENT="Used to store grading score for each user in a course">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="quizpoints" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="assingpoints" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="totalpoints" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="maxpoints" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="lastmodified" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="lytix_planner_course_custom" COMMENT="Default comment for the table, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="types" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
