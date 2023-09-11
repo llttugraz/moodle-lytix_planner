@@ -19,7 +19,7 @@
  *
  * @package    lytix_planner
  * @author     Guenther Moser <moser@tugraz.at>
- * @copyright  2019 Educational Technologies, Graz, University of Technology
+ * @copyright  2023 Educational Technologies, Graz, University of Technology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

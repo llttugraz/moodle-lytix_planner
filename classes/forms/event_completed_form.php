@@ -18,8 +18,8 @@
  * This is a one-line short description of the file.
  *
  * @package    lytix_planner
- * @author     Günther Moser
- * @copyright  2020 Educational Technologies, Graz, University of Technology
+ * @author     Guenther Moser <moser@tugraz.at>
+ * @copyright  2023 Educational Technologies, Graz, University of Technology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
