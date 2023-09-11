@@ -55,7 +55,6 @@ var planner = {
     timeFormatter: new Intl.DateTimeFormat('de-AT', {
         hour: '2-digit', minute: '2-digit',
     }),
-
     init: function(data) {
         if (svgcontainer !== null) {
             svgWidth = svgcontainer.offsetWidth;
@@ -85,11 +84,9 @@ var planner = {
                 (planner.paddingleft + planner.paddingright)) / planner.months;
         }
     },
-
     getType: function(a) {
         return a.type;
     },
-
     storeEvents: function(events) {
         planner.storedEvents = new Map();
         planner.storedMilestones = new Map();
@@ -113,18 +110,15 @@ var planner = {
             }
         }
     },
-
     drawLoading: function() {
         var img = '<img src="../../../pix/i/loading.gif" ' +
             'alt="LoadingImage" style="width:48px;height:48px;">';
         var widget = document.getElementById('PlannerWidget');
         widget.innerHTML = img + ' ' + planner.strings.loading_msg;
     },
-
     updateSvgHeight: function(height) {
         document.querySelector('#PlannerWidget svg').setAttribute('height', height);
     },
-
     drawplanner: function() {
         const y = planner.barPosY;
         var date = planner.startDate.clone();

@@ -17,6 +17,7 @@
 /**
  * Plugin version info
  * @package    lytix_planner
+ * @author     Guenther Moser <moser@tugraz.at>
  * @copyright  2023 Educational Technologies, Graz, University of Technology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,6 +32,6 @@ $plugin->dependencies = [
     'lytix_logs' => ANY_VERSION,
     'lytix_helper' => ANY_VERSION,
 ];
-$plugin->release   = 'v1.0.6';
+$plugin->release   = 'v1.0.7';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->supported = [401, 401];
