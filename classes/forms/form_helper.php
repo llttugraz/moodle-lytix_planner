@@ -51,36 +51,6 @@ class form_helper {
     }
 
     /**
-     * Get the values for the offset select.
-     *
-     * @return int[]
-     */
-    public static function get_offsetcount() {
-        $selectcount = [
-                1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,
-                8 => 8, 9 => 9, 10 => 10, 11 => 11, 12 => 12, 13 => 13, 14 => 14
-        ];
-        return $selectcount;
-    }
-
-    /**
-     * Get the values for the options select.
-     *
-     * @return array
-     * @throws \coding_exception
-     */
-    public static function get_send_options() {
-        $component = 'lytix_planner';
-        $options   = [
-                'email'   => get_string('email', $component),
-                'message' => get_string('message', $component),
-                'both'    => get_string('both', $component),
-                'none'    => get_string('none', $component),
-        ];
-        return $options;
-    }
-
-    /**
      * Get the groups for this course.
      *
      * @param \stdClass|null $course
@@ -98,51 +68,6 @@ class form_helper {
             $options[0] = get_string('no_group', 'lytix_planner');
         }
         return $options;
-    }
-
-    /**
-     * Creates the offset selector for the form.
-     *
-     * @param \moodleform $mform
-     * @param array|null     $types
-     * @param int            $i
-     * @return mixed
-     * @throws \coding_exception
-     */
-    public static function add_offset_selector($mform, $types, $i) {
-
-        $selectcount = self::get_offsetcount();
-
-        $select = $mform->addElement('select', 'offset' . $types['en'][$i],
-                                     get_string('offset', 'lytix_planner'), $selectcount);
-        $select->setSelected($types['offset'][$i]);
-        $select->setMultiple(false);
-        $mform->addHelpButton('offset' . $types['en'][$i], 'offset', 'lytix_planner');
-        $mform->disabledIf('offset' . $types['en'][$i], 'softlock', 'notchecked');
-        return $mform;
-    }
-
-    /**
-     * Creates the option selector for the form.
-     *
-     * @param \moodleform $mform
-     * @param array|null     $types
-     * @param int            $i
-     * @return mixed
-     * @throws \coding_exception
-     */
-    public static function add_options_selector($mform, $types, $i) {
-
-        $component = 'lytix_planner';
-        $options   = self::get_send_options();
-
-        $select = $mform->addElement('select', 'options' . $types['en'][$i],
-                                     get_string('notification_option', $component), $options);
-        $select->setSelected($types['options'][$i]);
-        $select->setMultiple(false);
-        $mform->addHelpButton('options', 'notification_option', $component);
-        $mform->disabledIf('options' . $types['en'][$i], 'softlock', 'notchecked');
-        return $mform;
     }
 
     /**

@@ -28,62 +28,14 @@
 
 namespace lytix_planner;
 
+use external_api;
 use lytix_logs\logger;
 use lytix_planner\notification_settings;
 
 /**
  * Class planner_notifications_lib
  */
-class planner_notifications_lib extends \external_api {
-
-    /**
-     * Checks personalized notification parameters.
-     * @return \external_function_parameters
-     */
-    public static function allow_personalized_notifications_parameters() {
-        return new \external_function_parameters(
-            array(
-                'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
-                'courseid' => new \external_value(PARAM_INT, 'The course ID', VALUE_REQUIRED),
-            )
-        );
-    }
-
-    /**
-     * Checks personalized notification return values.
-     * @return \external_single_structure
-     */
-    public static function allow_personalized_notifications_returns() {
-        return new \external_single_structure(
-            [
-                'allow' => new \external_value(PARAM_BOOL, 'can the students edit the settings?', VALUE_REQUIRED),
-            ]
-        );
-    }
-
-    /**
-     * Allow personalized notifications.
-     * @param int $contextid
-     * @param int $courseid
-     * @return bool[]
-     * @throws \coding_exception
-     * @throws \invalid_parameter_exception
-     * @throws \restricted_context_exception
-     */
-    public static function allow_personalized_notifications($contextid, $courseid) {
-        $params  = self::validate_parameters(self::allow_personalized_notifications_parameters(), [
-            'contextid' => $contextid,
-            'courseid' => $courseid,
-        ]);
-
-        // We always must call validate_context in a webservice.
-        $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
-        self::validate_context($context);
-
-        $settings = notification_settings::test_and_set_course($courseid);
-
-        return ['allow' => (bool)$settings->enable_user_customization ];
-    }
+class planner_notifications_lib extends external_api {
 
     /**
      * Checks course notification settings parameters.
@@ -148,8 +100,6 @@ class planner_notifications_lib extends \external_api {
             $settings->courseid = $courseid;
             $settings->start_time = $starttime;
             $settings->end_time = $endtime;
-            $settings->enable_course_notifications = $data['enable_course_notifications'];
-            $settings->enable_user_customization = $data['enable_user_customization'];
 
             $lang = current_language();
 
@@ -172,10 +122,6 @@ class planner_notifications_lib extends \external_api {
                     $types['de'] = array_values($types['de']);
                     unset($types['en'][$i]);
                     $types['en'] = array_values($types['en']);
-                    unset($types['options'][$i]);
-                    $types['options'] = array_values($types['options']);
-                    unset($types['offset'][$i]);
-                    $types['offset'] = array_values($types['offset']);
                     $counttypes--;
                     $i--;
                     continue;
@@ -191,8 +137,6 @@ class planner_notifications_lib extends \external_api {
                 }
                 $types['en'][$i] = $data['english' . $typenameen];
                 $types['de'][$i] = $data['german' . $typenameen];
-                $types['options'][$i] = $data['options' . $typenameen];
-                $types['offset'][$i] = $data['offset' . $typenameen];
             }
 
             $settings->types = json_encode($types);
@@ -202,95 +146,9 @@ class planner_notifications_lib extends \external_api {
             if ($data['new_type'] == 1) {
                 if (!in_array($data['select_other_english'], $types['en']) ||
                     !in_array($data['select_other_german'], $types['de'])) {
-                    dynamic_events::set_event_types($courseid, $data['select_other_german'], $data['select_other_english'],
-                                                    $data['select_other_options'], $data['select_other_offset']);
+                    dynamic_events::set_event_types($courseid, $data['select_other_german'], $data['select_other_english']);
                 }
             }
-        }
-        return [
-            'success' => (bool)$success,
-        ];
-    }
-
-    /**
-     * Checks user notification settings parameters.
-     * @return \external_function_parameters
-     */
-    public static function store_user_notification_settings_parameters() {
-        return new \external_function_parameters(
-            array(
-                'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
-                'courseid' => new \external_value(PARAM_INT, 'The course ID', VALUE_REQUIRED),
-                'userid' => new \external_value(PARAM_INT, 'The user ID', VALUE_REQUIRED),
-                'jsonformdata' => new \external_value(PARAM_RAW, 'Data form from', VALUE_REQUIRED),
-            )
-        );
-    }
-
-    /**
-     * Checks user notification settings return values.
-     * @return \external_single_structure
-     */
-    public static function store_user_notification_settings_returns() {
-        return new \external_single_structure(
-            [
-                'success' => new \external_value(PARAM_BOOL, 'settings updated?', VALUE_REQUIRED),
-            ]
-        );
-    }
-
-    /**
-     * Gets user notification settings and stores them in the DB.
-     * @param int $contextid
-     * @param int $courseid
-     * @param int $userid
-     * @param false|mixed|\stdClass $jsonformdata
-     * @return bool[]
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \invalid_parameter_exception
-     * @throws \restricted_context_exception
-     */
-    public static function store_user_notification_settings($contextid, $courseid, $userid, $jsonformdata) {
-        global $DB;
-        $params  = self::validate_parameters(self::store_user_notification_settings_parameters(), [
-            'contextid' => $contextid,
-            'courseid' => $courseid,
-            'userid' => $userid,
-            'jsonformdata' => $jsonformdata
-        ]);
-
-        // We always must call validate_context in a webservice.
-        $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
-        self::validate_context($context);
-
-        $data = array();
-        $serialiseddata = json_decode($params['jsonformdata']);
-        parse_str($serialiseddata, $data);
-
-        if ($data['softlock']) {
-
-            $settings = notification_settings::test_and_set_user($courseid, $userid);
-
-            $settings->courseid = $courseid;
-            $settings->userid = $userid;
-            $settings->enable_custom_customization = $data['enable_custom_customization'];
-
-            // Change the options accordingly.
-            $types = dynamic_events::get_event_types($courseid);
-            $types = json_decode($types, true);
-
-            $counttypes = count($types['options']);
-            for ($i = 0; $i < $counttypes; $i++) {
-                if ($types['en'][$i] == "Other" || $types['de'][$i] == "Sonstige") {
-                    continue;
-                }
-                $types['options'][$i] = $data['options' . $types['en'][$i]];
-                $types['offset'][$i] = $data['offset' . $types['en'][$i]];
-            }
-            $settings->types = json_encode($types);
-
-            $success = $DB->update_record('lytix_planner_usr_settings', $settings);
         }
         return [
             'success' => (bool)$success,

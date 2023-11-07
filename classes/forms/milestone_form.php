@@ -106,23 +106,6 @@ class milestone_form extends moodleform {
         $mform->setType('text', PARAM_CLEANHTML);
         $mform->addHelpButton('text', 'set_text', $component);
 
-        $selectcount = form_helper::get_offsetcount();
-        $select = $mform->addElement('select', 'moffset',
-            get_string('offset', 'lytix_planner'), $selectcount);
-        ((int)$this->_customdata['moffset']) ? $offset = (int)$this->_customdata['moffset'] : $offset = 3;
-        $select->setSelected($offset);
-        $select->setMultiple(false);
-        $mform->addHelpButton('moffset', 'moffset', 'lytix_planner');
-        $mform->disabledIf('moffset', 'softlock', 'notchecked');
-
-        $options = form_helper::get_send_options();
-        $select = $mform->addElement('select', 'moption',
-            get_string('notification_option', $component), $options);
-        $select->setSelected($this->_customdata['moption']);
-        $select->setMultiple(false);
-        $mform->addHelpButton('moption', 'notification_option', $component);
-        $mform->disabledIf('moption', 'softlock', 'notchecked');
-
         $mform->addElement('advcheckbox', 'completed', get_string('set_completed', $component));
         $mform->setDefault('completed', $this->_customdata['completed']);
         $mform->addHelpButton('completed', 'set_completed', $component);

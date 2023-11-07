@@ -27,19 +27,17 @@ namespace lytix_planner;
 
 defined('MOODLE_INTERNAL') || die();
 
-global $CFG;
-
-require_once($CFG->dirroot . '/webservice/tests/helpers.php');
-require_once($CFG->dirroot . '/lib/externallib.php');
-
 use external_api;
 use externallib_advanced_testcase;
 use lytix_helper\dummy;
 
+global $CFG;
+require_once("{$CFG->dirroot}/webservice/tests/helpers.php");
+
 /**
  * Class planner_get_test
  *
- * @group learners_corner
+ * @runTestsInSeparateProcesses
  * @coversDefaultClass \lytix_planner\planner_get
  */
 class planner_get_test extends externallib_advanced_testcase {
@@ -70,6 +68,8 @@ class planner_get_test extends externallib_advanced_testcase {
     public function setUp(): void {
         $this->resetAfterTest(true);
         $this->setAdminUser();
+        global $CFG;
+        require_once("{$CFG->libdir}/externallib.php");
 
         $course            = new \stdClass();
         $course->fullname  = 'Planner Event Lib Test Course';

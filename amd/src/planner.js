@@ -498,19 +498,6 @@ var planner = {
         });
 
         if (!planner.isteacher) {
-            var promises = Ajax.call([
-                {
-                    methodname: 'lytix_planner_allow_personalized_notifications',
-                    args: {contextid: planner.contextid, courseid: planner.courseid},
-                }
-            ]);
-            promises[0].done(function(response) {
-                if (response.allow) {
-                    form.appendChild(planner.addNotificationUserSettingsBtn());
-                }
-            }).fail(function(ex) {
-                window.console.log(ex);
-            });
             form.appendChild(planner.addMilestoneBtn());
         } else {
             form.appendChild(planner.addNotificationCourseSettingsBtn());

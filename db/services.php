@@ -58,13 +58,6 @@ $functions = array(
                 'type'        => 'write',
                 'ajax'        => 'true'
         ),
-        'lytix_planner_allow_personalized_notifications'   => array(
-                'classname'   => 'lytix_planner\\planner_notifications_lib',
-                'methodname'  => 'allow_personalized_notifications',
-                'description' => 'Can the students edit the notification settings?',
-                'type'        => 'read',
-                'ajax'        => 'true'
-        ),
         'lytix_planner_store_course_notification_settings' => array(
                 'classname'   => 'lytix_planner\\planner_notifications_lib',
                 'methodname'  => 'store_course_notification_settings',
