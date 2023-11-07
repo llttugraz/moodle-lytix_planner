@@ -87,7 +87,7 @@ class planner_get_test extends externallib_advanced_testcase {
         set_config('semester_start', $twomonthsago->format('Y-m-d'), 'local_lytix');
         set_config('semester_end', $inthreemonths->format('Y-m-d'), 'local_lytix');
 
-        $this->crssettings = notification_settings::test_and_set_course($this->course->id);
+        notification_settings::test_and_set_course($this->course->id);
         set_config('course_list', $this->course->id, 'local_lytix');
         // Set platform.
         set_config('platform', 'learners_corner', 'local_lytix');
