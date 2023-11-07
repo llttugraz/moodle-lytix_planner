@@ -28,13 +28,14 @@
 
 namespace lytix_planner;
 
+use external_api;
 use lytix_logs\logger;
 use lytix_planner\notification_settings;
 
 /**
  * Class planner_notifications_lib
  */
-class planner_notifications_lib extends \external_api {
+class planner_notifications_lib extends external_api {
 
     /**
      * Checks course notification settings parameters.

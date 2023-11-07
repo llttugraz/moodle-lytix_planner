@@ -28,13 +28,12 @@
 
 namespace lytix_planner;
 
-global $CFG;
-require_once("{$CFG->libdir}/externallib.php");
+use external_api;
 
 /**
  * Class planner_get
  */
-class planner_get extends \external_api {
+class planner_get extends external_api {
     /**
      * Checks parameters.
      *
@@ -58,8 +57,8 @@ class planner_get extends \external_api {
     public static function service_returns() {
         return new \external_single_structure(
             [
-                'startDate' => new \external_value(PARAM_INT, 'CourseId'),
-                'endDate' => new \external_value(PARAM_INT, 'CourseId'),
+                'startDate' => new \external_value(PARAM_INT, 'CourseId', VALUE_OPTIONAL),
+                'endDate' => new \external_value(PARAM_INT, 'CourseId'), VALUE_OPTIONAL,
                 'items' => new \external_multiple_structure(
                     new \external_single_structure(
                         [
@@ -84,8 +83,8 @@ class planner_get extends \external_api {
                             'send' => new \external_value(PARAM_TEXT, 'Points of activity', VALUE_OPTIONAL),
                             'countcompleted' => new \external_value(
                                 PARAM_INT, 'How many students have completed the event', VALUE_OPTIONAL),
-                        ], '', false
-                    )
+                        ], '', VALUE_OPTIONAL
+                    ), '', VALUE_OPTIONAL
                 ),
             ]
         );
