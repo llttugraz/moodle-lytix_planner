@@ -81,7 +81,10 @@ Detail what personal data the plugin stores and how it handles this data.
 
 ### Version v1.0.8
 
-- Release of the plugin for Moodle 4.2 and 4.3. Fix known bugs with Moodle 4.2+ and remove the notifications.
+- Release of the plugin for Moodle 4.2 and 4.3.
+- Fix known bugs with Moodle 4.2+.
+- Remove the notifications.
+- Disable grunt because of an error in the CI.
 
 ## License
 
