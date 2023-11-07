@@ -58,7 +58,7 @@ class planner_get extends external_api {
         return new \external_single_structure(
             [
                 'startDate' => new \external_value(PARAM_INT, 'CourseId', VALUE_OPTIONAL),
-                'endDate' => new \external_value(PARAM_INT, 'CourseId'), VALUE_OPTIONAL,
+                'endDate' => new \external_value(PARAM_INT, 'CourseId', VALUE_OPTIONAL),
                 'items' => new \external_multiple_structure(
                     new \external_single_structure(
                         [
