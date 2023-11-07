@@ -22,7 +22,7 @@ This plugin helps the students and teachers to plan and organize the course date
 ## Installation
 
 1. Download the plugin and extract the files.
-2. Move the extracted folder to your `moodle/mod` directory.
+2. Move the extracted folder to your `moodle/local/lytix/modules/` directory.
 3. Log in as an admin in Moodle and navigate to `Site Administration > Plugins > Install plugins`.
 4. Follow the on-screen instructions to complete the installation.
 
