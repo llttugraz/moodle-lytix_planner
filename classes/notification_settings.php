@@ -39,13 +39,9 @@ class notification_settings {
     public static function get_default_types() {
         $optionsgerman = array('Vorlesung', 'Quiz', 'Aufgabe', 'Feedback', 'Prüfung', 'Abgabegespräch', 'Sonstiges');
         $optionsenglish = array('Lecture', 'Quiz', 'Assignment', 'Feedback', 'Exam', 'Interview', 'Other');
-        $optionsoptions = array('email', 'email', 'email', 'email', 'email', 'email', 'email');
-        $offsetoptions = array('3', '3', '3', '3', '3', '3', '3');
         $stdtypes         = [
             'de' => $optionsgerman,
             'en' => $optionsenglish,
-            'options' => $optionsoptions,
-            'offset' => $offsetoptions,
         ];
         return json_encode($stdtypes);
     }
@@ -67,9 +63,6 @@ class notification_settings {
 
             $settings->start_time                     = course_settings::getcoursestartdate($courseid)->getTimestamp();
             $settings->end_time                       = course_settings::getcourseenddate($courseid)->getTimestamp();
-            $settings->enable_course_notifications    = 0;
-
-            $settings->enable_user_customization      = 0;
 
             $settings->types = self::get_default_types();
 
@@ -94,36 +87,8 @@ class notification_settings {
             $settings                                 = new \stdClass();
             $settings->courseid                       = $courseid;
             $settings->userid                         = $userid;
-            $settings->enable_custom_customization    = 1;
             $crssett = self::test_and_set_course($courseid);
             $settings->types = $crssett->types;
-
-            $settings->id = $DB->insert_record($table, $settings);
-        }
-        return $settings;
-    }
-
-    /**
-     * Test and sets grading report.
-     * @param int $courseid
-     * @param int $userid
-     * @return false|mixed|\stdClass
-     * @throws \dml_exception
-     */
-    public static function test_and_set_report($courseid, $userid) {
-        global $DB;
-        $table    = 'lytix_planner_usr_grade_rep';
-        $settings = $DB->get_record($table, ['courseid' => $courseid, 'userid' => $userid]);
-        // Create default settings for this course.
-        if (!$settings) {
-            $settings               = new \stdClass();
-            $settings->courseid     = $courseid;
-            $settings->userid       = $userid;
-            $settings->quizpoints   = 0;
-            $settings->assingpoints = 0;
-            $settings->totalpoints  = 0;
-            $settings->maxpoints    = 0;
-            $settings->lastmodified = (new \DateTime('now'))->getTimestamp();
 
             $settings->id = $DB->insert_record($table, $settings);
         }
@@ -135,12 +100,11 @@ class notification_settings {
      * @param int $eventid
      * @param int $courseid
      * @param int $userid
-     * @param int $send
      * @param int $completed
      * @return false|mixed|\stdClass
      * @throws \dml_exception
      */
-    public static function test_and_set_event_comp($eventid, $courseid, $userid, $send = 0, $completed = 0) {
+    public static function test_and_set_event_comp($eventid, $courseid, $userid, $completed = 0) {
         global $DB;
         $table    = 'lytix_planner_event_comp';
         $settings = $DB->get_record($table, ['eventid' => $eventid, 'courseid' => $courseid, 'userid' => $userid]);
@@ -151,32 +115,16 @@ class notification_settings {
             $settings->courseid     = $courseid;
             $settings->userid       = $userid;
             $settings->completed    = $completed;
-            $settings->send         = $send;
             $settings->timestamp    = (new \DateTime('now'))->getTimestamp();
 
             $settings->id = $DB->insert_record($table, $settings);
         }
 
-        if ((int)$settings->send != (int)$send) {
-            $settings->send = $send;
-        }
         if ((int)$settings->completed != (int)$completed) {
             $settings->completed = $completed;
         }
 
         return $settings;
-    }
-
-    /**
-     * Updates user grading report.
-     * @param false|mixed|\stdClass $student
-     * @return bool
-     * @throws \dml_exception
-     */
-    public static function update_report($student) {
-        global $DB;
-
-        return $DB->update_record('lytix_planner_usr_grade_rep', $student);
     }
 
     /**

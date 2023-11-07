@@ -75,16 +75,6 @@ class course_notification_settings_form extends \moodleform {
         $mform->addHelpButton('end_time', 'end_time', $component);
         $mform->disabledIf('end_time', 'softlock', 'notchecked');
 
-        $mform->addElement('advcheckbox', 'enable_course_notifications', get_string('enable_course_notifications', $component));
-        $mform->setDefault('enable_course_notifications', $data->enable_course_notifications);
-        $mform->addHelpButton('enable_course_notifications', 'enable_course_notifications', $component);
-        $mform->disabledIf('enable_course_notifications', 'softlock', 'notchecked');
-
-        $mform->addElement('advcheckbox', 'enable_user_customization', get_string('enable_user_customization', $component));
-        $mform->setDefault('enable_user_customization', $data->enable_user_customization);
-        $mform->addHelpButton('enable_user_customization', 'enable_user_customization', $component);
-        $mform->disabledIf('enable_user_customization', 'softlock', 'notchecked');
-
         $types = $data->types;
         $types = json_decode($types, true);
         $counttypes = count($types['en']);
@@ -103,8 +93,6 @@ class course_notification_settings_form extends \moodleform {
             $mform->setDefault('german' . $typenameen, $types['de'][$i]);
             $mform->disabledIf('german' . $typenameen, 'softlock', 'notchecked');
 
-            $mform = form_helper::add_options_selector($mform, $types, $i);
-            $mform = form_helper::add_offset_selector($mform, $types, $i);
             $mform->addElement('advcheckbox', 'delete' . $typenameen, get_string('set_delete_type', $component));
             $mform->setDefault('delete' . $typenameen, 0);
             $mform->disabledIf('delete' . $typenameen, 'softlock', 'notchecked');
@@ -125,21 +113,6 @@ class course_notification_settings_form extends \moodleform {
         $mform->hideIf('select_other_english', 'new_type', 'notchecked');
         $mform->disabledIf('select_other_english', 'softlock', 'notchecked');
 
-        $options = form_helper::get_send_options();
-        $select = $mform->addElement('select', 'select_other_options', get_string('notification_option', $component), $options);
-        $select->setMultiple(false);
-        $mform->addHelpButton('select_other_options', 'notification_option', $component);
-        $mform->hideIf('select_other_options', 'new_type', 'notchecked');
-        $mform->disabledIf('select_other_options', 'softlock', 'notchecked');
-
-        $selectcount = form_helper::get_offsetcount();
-        $select = $mform->addElement('select', 'select_other_offset' . $types['en'][$i],
-                                     get_string('offset', 'lytix_planner'), $selectcount);
-        $select->setSelected($types['select_other_offset'][$i]);
-        $select->setMultiple(false);
-        $mform->addHelpButton('select_other_offset' . $types['en'][$i], 'offset', 'lytix_planner');
-        $mform->hideIf('select_other_offset', 'new_type', 'notchecked');
-        $mform->disabledIf('select_other_offset' . $types['en'][$i], 'softlock', 'notchecked');
         $this->set_data($data);
     }
 }

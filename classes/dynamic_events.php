@@ -49,26 +49,19 @@ class dynamic_events {
      * @param int $courseid
      * @param string $typegerman
      * @param string $typeenglish
-     * @param string $typeoption
-     * @param int|string $typeoffset
      * @throws \dml_exception
      */
-    public static function  set_event_types($courseid, $typegerman, $typeenglish,
-                                            $typeoption = 'email', $typeoffset = 3) {
+    public static function  set_event_types($courseid, $typegerman, $typeenglish) {
         global $DB;
         // TODO check if type already exists. If not retrun new types, else return false.
         $record      = notification_settings::test_and_set_course($courseid);
         $types       = json_decode($record->types, true);
         array_push($types['en'], $typeenglish);
         array_push($types['de'], $typegerman);
-        array_push($types['options'], $typeoption);
-        array_push($types['offset'], (string)$typeoffset);
 
         $newtypes     = [
             'de' => $types['de'],
             'en' => $types['en'],
-            'options' => $types['options'],
-            'offset' => $types['offset'],
         ];
         $record->types = json_encode($newtypes);
 

@@ -64,27 +64,6 @@ class user_notification_settings_form extends \moodleform {
         $mform->setDefault('softlock', 0);
         $mform->addHelpButton('softlock', 'softlock', $component);
 
-        $mform->addElement('advcheckbox', 'enable_custom_customization', get_string('enable_custom_customization', $component));
-        $mform->setDefault('enable_custom_customization', $data->enable_custom_customization);
-        $mform->addHelpButton('enable_custom_customization', 'enable_custom_customization', $component);
-        $mform->disabledIf('enable_custom_customization', 'softlock', 'notchecked');
-
-        $types = $data->types;
-        $types = json_decode($types, true);
-
-        $counttypes = count($types['en']);
-        for ($i = 0; $i < $counttypes; $i++) {
-            if ($types['en'][$i] == "Other" || $types['de'][$i] == 'Sonstige') {
-                continue;
-            }
-            $mform->addElement('header', 'header_' . $types['en'][$i], $types['en'][$i] . ' - ' . $types['de'][$i]);
-            $mform->disabledIf('header_' . $types['en'][$i], 'softlock', 'notchecked');
-
-            form_helper::add_options_selector($mform, $types, $i);
-
-            form_helper::add_offset_selector($mform, $types, $i);
-        }
-
         $this->set_data($data);
     }
 }
