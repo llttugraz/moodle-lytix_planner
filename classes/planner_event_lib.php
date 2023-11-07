@@ -28,13 +28,14 @@
 
 namespace lytix_planner;
 
+use external_api;
 use lytix_logs\logger;
 use lytix_planner\dynamic_events;
 
 /**
  * Class planner_event_lib
  */
-class planner_event_lib extends \external_api {
+class planner_event_lib extends external_api {
     /**
      * Checks planner event parameters.
      *

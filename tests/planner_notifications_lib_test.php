@@ -36,7 +36,7 @@ use externallib_advanced_testcase;
 /**
  * Class planner_notifications_lib
  *
- * @group learners_corner
+ * @runTestsInSeparateProcesses
  * @coversDefaultClass \lytix_planner\planner_notifications_lib
  */
 class planner_notifications_lib_test extends externallib_advanced_testcase {

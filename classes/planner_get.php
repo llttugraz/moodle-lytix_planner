@@ -28,6 +28,9 @@
 
 namespace lytix_planner;
 
+global $CFG;
+require_once("{$CFG->libdir}/externallib.php");
+
 /**
  * Class planner_get
  */
