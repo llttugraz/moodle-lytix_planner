@@ -28,14 +28,12 @@
 
 namespace lytix_planner;
 
-use external_api;
-use lytix_logs\logger;
-use lytix_planner\notification_settings;
+require_once("{$CFG->libdir}/externallib.php");
 
 /**
  * Class planner_notifications_lib
  */
-class planner_notifications_lib extends external_api {
+class planner_notifications_lib extends \external_api {
 
     /**
      * Checks course notification settings parameters.

@@ -28,13 +28,14 @@
 
 namespace lytix_planner;
 
-use external_api;
+require_once("{$CFG->libdir}/externallib.php");
+
 use lytix_logs\logger;
 
 /**
  * Class planner_milestone_lib
  */
-class planner_milestone_lib extends external_api {
+class planner_milestone_lib extends \external_api {
     /**
      * Checks parameters.
      * @return \external_function_parameters
