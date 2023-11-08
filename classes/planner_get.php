@@ -28,12 +28,15 @@
 
 namespace lytix_planner;
 
-use external_api;
+defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
+require_once("{$CFG->libdir}/externallib.php");
 
 /**
  * Class planner_get
  */
-class planner_get extends external_api {
+class planner_get extends \external_api {
     /**
      * Checks parameters.
      *

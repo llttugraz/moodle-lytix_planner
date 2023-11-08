@@ -55,13 +55,6 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
     private $context = null;
 
     /**
-     * Variable for the coursesettings
-     *
-     * @var \stdClass|null
-     */
-    private $crssettings = null;
-
-    /**
      * Setup called before any test case.
      */
     public function setUp(): void {
@@ -81,7 +74,7 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
         set_config('course_list', $this->course->id, 'local_lytix');
         set_config('platform', 'learners_corner', 'local_lytix');
 
-        $this->crssettings = notification_settings::test_and_set_course($this->course->id);
+        notification_settings::test_and_set_course($this->course->id);
     }
 
     /**

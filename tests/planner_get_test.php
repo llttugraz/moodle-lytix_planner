@@ -27,12 +27,13 @@ namespace lytix_planner;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+require_once("{$CFG->dirroot}/webservice/tests/helpers.php");
+
 use external_api;
 use externallib_advanced_testcase;
 use lytix_helper\dummy;
 
-global $CFG;
-require_once("{$CFG->dirroot}/webservice/tests/helpers.php");
 
 /**
  * Class planner_get_test
