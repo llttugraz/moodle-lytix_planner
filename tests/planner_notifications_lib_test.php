@@ -29,7 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once("{$CFG->dirroot}/webservice/tests/helpers.php");
-require_once("{$CFG->libdir}/externallib.php");
 
 use external_api;
 use externallib_advanced_testcase;
@@ -68,6 +67,9 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
     public function setUp(): void {
         $this->resetAfterTest(true);
         $this->setAdminUser();
+        global $CFG;
+        require_once("{$CFG->libdir}/externallib.php");
+
 
         $this->course = $this->getDataGenerator()->create_course();
         $this->context  = \context_course::instance($this->course->id);
