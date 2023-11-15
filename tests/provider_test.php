@@ -64,10 +64,7 @@ class provider_test extends provider_testcase {
         $record->enddate = rand(1, 1000);
         $record->title = "title";
         $record->text = "text";
-        $record->moffset = rand(1, 14);
-        $record->moption = "moption";
         $record->completed = rand(0, 1);
-        $record->send = rand(0, 1);
 
         $DB->insert_record('lytix_planner_milestone', $record);
 
@@ -76,26 +73,8 @@ class provider_test extends provider_testcase {
         $record->userid = $user->id;
         $record->eventid = rand(1, 1000);
         $record->completed = rand(0, 1);
-        $record->send = rand(0, 1);
         $record->timestamp = rand(1, 1000);
         $DB->insert_record('lytix_planner_event_comp', $record);
-
-        $record = new \stdClass();
-        $record->courseid = $course->id;
-        $record->userid = $user->id;
-        $record->enable_custom_customization = rand(0, 1);
-        $record->types = "types";
-        $DB->insert_record('lytix_planner_usr_settings', $record);
-
-        $record = new \stdClass();
-        $record->courseid = $course->id;
-        $record->userid = $user->id;
-        $record->quizpoints = rand(1, 1000);
-        $record->assingpoints = rand(1, 1000);
-        $record->totalpoints = rand(1, 1000);
-        $record->maxpoints = rand(1, 1000);
-        $record->lastmodified = rand(1, 1000);
-        $DB->insert_record('lytix_planner_usr_grade_rep', $record);
     }
 
     /**
@@ -164,8 +143,6 @@ class provider_test extends provider_testcase {
 
         $this->assertTrue($this->privacy_delete_context_user_sub_test($user, 'lytix_planner_milestone'));
         $this->assertTrue($this->privacy_delete_context_user_sub_test($user, 'lytix_planner_event_comp'));
-        $this->assertTrue($this->privacy_delete_context_user_sub_test($user, 'lytix_planner_usr_settings'));
-        $this->assertTrue($this->privacy_delete_context_user_sub_test($user, 'lytix_planner_usr_grade_rep'));
     }
 
     /**
@@ -207,8 +184,6 @@ class provider_test extends provider_testcase {
 
         $this->assertTrue($this->privacy_get_metadata_sub_test('lytix_planner_milestone'));
         $this->assertTrue($this->privacy_get_metadata_sub_test('lytix_planner_event_comp'));
-        $this->assertTrue($this->privacy_get_metadata_sub_test('lytix_planner_usr_settings'));
-        $this->assertTrue($this->privacy_get_metadata_sub_test('lytix_planner_usr_grade_rep'));
     }
 
     /**
@@ -247,11 +222,7 @@ class provider_test extends provider_testcase {
         return empty($DB->get_records_sql(
                 "SELECT * FROM {lytix_planner_milestone} WHERE userid = :userid", [ "userid" => $user->id])) &&
             empty($DB->get_records_sql(
-                "SELECT * FROM {lytix_planner_event_comp} WHERE userid = :userid", [ "userid" => $user->id])) &&
-            empty($DB->get_records_sql(
-                "SELECT * FROM {lytix_planner_usr_settings} WHERE userid = :userid", [ "userid" => $user->id])) &&
-            empty($DB->get_records_sql(
-                "SELECT * FROM {lytix_planner_usr_grade_rep} WHERE userid = :userid", [ "userid" => $user->id]));
+                "SELECT * FROM {lytix_planner_event_comp} WHERE userid = :userid", [ "userid" => $user->id]));
     }
 
     /**
@@ -297,9 +268,7 @@ class provider_test extends provider_testcase {
         $privacy::delete_data_for_all_users_in_context(\context_system::instance());
 
         return  empty($DB->get_records_sql("SELECT * FROM {lytix_planner_milestone}")) &&
-                empty($DB->get_records_sql("SELECT * FROM {lytix_planner_event_comp}")) &&
-                empty($DB->get_records_sql("SELECT * FROM {lytix_planner_usr_settings}")) &&
-                empty($DB->get_records_sql("SELECT * FROM {lytix_planner_usr_grade_rep}"));
+                empty($DB->get_records_sql("SELECT * FROM {lytix_planner_event_comp}"));
     }
 
     /**
