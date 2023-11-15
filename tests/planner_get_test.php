@@ -336,7 +336,8 @@ class planner_get_test extends externallib_advanced_testcase {
                     $milestonedate->format('n') . "&startdate%5Byear%5D=" . $milestonedate->format('Y') . "&startdate%5Bhour%5D=" .
                     $milestonedate->format('G') . "&startdate%5Bminute%5D=" . $milestonedate->format('i') . "&hour=" .
                     $milestoneenddate->format('G') . "&minute=" . $milestoneenddate->format('i') . "&title=" .
-                    $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" . "&completed=" . $completed . "\"";
+                    $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" .
+                    "&completed=" . $completed . "\"";
 
         $result = planner_milestone_lib::planner_milestone($this->context->id, $formdata);
         external_api::clean_returnvalue(planner_milestone_lib::planner_milestone_returns(), $result);
@@ -365,7 +366,8 @@ class planner_get_test extends externallib_advanced_testcase {
                              $milestonedate->format('G') . "&startdate%5Bminute%5D=" . $milestonedate->format('i') . "&hour=" .
                              $milestoneenddate->format('G') . "&minute=" . $milestoneenddate->format('i') .
                              "&type=0&mgroup=0&title=" .
-                             $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" . "email&completed=" . $completed . "\"";
+                             $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" .
+                             "email&completed=" . $completed . "\"";
 
         $result = planner_milestone_lib::planner_milestone($this->context->id, $formdatacompleted);
         external_api::clean_returnvalue(planner_milestone_lib::planner_milestone_returns(), $result);
