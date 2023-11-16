@@ -25,13 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2023110700; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2023111500; // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires = 2021051700; // Requires this Moodle version 3.11.
 $plugin->component = 'lytix_planner'; // Full name of the plugin.
 $plugin->dependencies = [
     'lytix_logs' => ANY_VERSION,
     'lytix_helper' => ANY_VERSION,
 ];
-$plugin->release   = 'v1.0.9';
+$plugin->release   = 'v1.1.0';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->supported = [401, 403];

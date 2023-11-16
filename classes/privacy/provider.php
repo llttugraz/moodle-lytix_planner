@@ -115,8 +115,6 @@ class provider implements
             $context->contextlevel == CONTEXT_SYSTEM) {
             $DB->delete_records('lytix_planner_milestone');
             $DB->delete_records('lytix_planner_event_comp');
-            $DB->delete_records('lytix_planner_usr_settings');
-            $DB->delete_records('lytix_planner_usr_grade_rep');
         }
     }
 
@@ -134,8 +132,6 @@ class provider implements
         $userid = $contextlist->get_user()->id;
         $DB->delete_records('lytix_planner_milestone', ['userid' => $userid]);
         $DB->delete_records('lytix_planner_event_comp', ['userid' => $userid]);
-        $DB->delete_records('lytix_planner_usr_settings', ['userid' => $userid]);
-        $DB->delete_records('lytix_planner_usr_grade_rep', ['userid' => $userid]);
     }
 
     /**
@@ -155,8 +151,6 @@ class provider implements
 
         $DB->delete_records_select('lytix_planner_milestone', "userid IN ({$userparamsarray})");
         $DB->delete_records_select('lytix_planner_event_comp', "userid IN ({$userparamsarray})");
-        $DB->delete_records_select('lytix_planner_usr_settings', "userid IN ({$userparamsarray})");
-        $DB->delete_records_select('lytix_planner_usr_grade_rep', "userid IN ({$userparamsarray})");
     }
 
     /**
@@ -191,18 +185,6 @@ class provider implements
 
         writer::with_context($contextlist->get_contexts()[0])
             ->export_data(["lytix_planner_event_comp"], (object)$dataset, "Entry of Download");
-        // Redo for third table.
-        $courseids = "SELECT * FROM {lytix_planner_usr_settings} WHERE (userid IN ({$roleassignments})) AND userid = :userid";
-        $dataset = $DB->get_records_sql($courseids, $params);
-
-        writer::with_context($contextlist->get_contexts()[0])
-            ->export_data(["lytix_planner_usr_settings"], (object)$dataset, "Entry of Download");
-        // Redo for fourth table.
-        $courseids = "SELECT * FROM {lytix_planner_usr_grade_rep} WHERE (userid IN ({$roleassignments})) AND userid = :userid";
-        $dataset = $DB->get_records_sql($courseids, $params);
-
-        writer::with_context($contextlist->get_contexts()[0])
-            ->export_data(["lytix_planner_usr_grade_rep"], (object)$dataset, "Entry of Download");
     }
 
     /**
@@ -254,24 +236,6 @@ class provider implements
 
         // Redo for the second table.
         $courseids = "SELECT userid FROM {lytix_planner_event_comp} WHERE (userid IN ({$roleassignments}))";
-        $userids = "SELECT * FROM {user} WHERE (id IN ({$courseids}))";
-
-        $params = [ "contextlevel" => CONTEXT_COURSE ];
-        $userlist->add_from_sql("id", $userids, $params);
-        $params = [ "contextlevel" => CONTEXT_SYSTEM ];
-        $userlist->add_from_sql("id", $userids, $params);
-
-        // Redo for the third table.
-        $courseids = "SELECT userid FROM {lytix_planner_usr_settings} WHERE (userid IN ({$roleassignments}))";
-        $userids = "SELECT * FROM {user} WHERE (id IN ({$courseids}))";
-
-        $params = [ "contextlevel" => CONTEXT_COURSE ];
-        $userlist->add_from_sql("id", $userids, $params);
-        $params = [ "contextlevel" => CONTEXT_SYSTEM ];
-        $userlist->add_from_sql("id", $userids, $params);
-
-        // Redo for the fourth table.
-        $courseids = "SELECT userid FROM {lytix_planner_usr_grade_rep} WHERE (userid IN ({$roleassignments}))";
         $userids = "SELECT * FROM {user} WHERE (id IN ({$courseids}))";
 
         $params = [ "contextlevel" => CONTEXT_COURSE ];

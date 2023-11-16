@@ -34,7 +34,7 @@ function xmldb_lytix_planner_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2023110700) {
+    if ($oldversion < 2023111500) {
 
         // Define table lytix_planner_course_custom to be dropped.
         $table = new xmldb_table('lytix_planner_course_custom');
@@ -132,7 +132,7 @@ function xmldb_lytix_planner_upgrade($oldversion) {
         }
 
         // Basic savepoint reached.
-        upgrade_plugin_savepoint(true, 2023110700, 'lytix', 'planner');
+        upgrade_plugin_savepoint(true, 2023111500, 'lytix', 'planner');
     }
     return true;
 }

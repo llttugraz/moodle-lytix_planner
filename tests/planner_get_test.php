@@ -328,8 +328,6 @@ class planner_get_test extends externallib_advanced_testcase {
         $milestoneenddate->setTime($milestoneenddate->format('G'), $milestoneenddate->format('i'), 00);
         $milestoneenddate->modify('+' . 2 . ' hours');
         $title     = "Title";
-        $offset    = 2;
-        $option    = 'email';
         $completed = 0;
 
         $formdata = "\"id=-1&courseid=" . $this->course->id . "&userid=" . get_admin()->id .
@@ -338,8 +336,8 @@ class planner_get_test extends externallib_advanced_testcase {
                     $milestonedate->format('n') . "&startdate%5Byear%5D=" . $milestonedate->format('Y') . "&startdate%5Bhour%5D=" .
                     $milestonedate->format('G') . "&startdate%5Bminute%5D=" . $milestonedate->format('i') . "&hour=" .
                     $milestoneenddate->format('G') . "&minute=" . $milestoneenddate->format('i') . "&title=" .
-                    $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1&moffset=" .
-                    $offset . "&moption=" . $option . "&completed=" . $completed . "\"";
+                    $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" .
+                    "&completed=" . $completed . "\"";
 
         $result = planner_milestone_lib::planner_milestone($this->context->id, $formdata);
         external_api::clean_returnvalue(planner_milestone_lib::planner_milestone_returns(), $result);
@@ -355,8 +353,6 @@ class planner_get_test extends externallib_advanced_testcase {
         $this::assertEquals($milestonedate->getTimestamp(), $milestone['items'][0]->startdate);
         $this::assertEquals(0, $milestone['items'][0]->completed);
         $this::assertEquals('Milestone', $milestone['items'][0]->type);
-        $this::assertEquals($offset, $milestone['items'][0]->moffset);
-        $this::assertEquals($option, $milestone['items'][0]->moption);
 
         external_api::clean_returnvalue(planner_get::service_returns(), $milestone);
 
@@ -370,8 +366,8 @@ class planner_get_test extends externallib_advanced_testcase {
                              $milestonedate->format('G') . "&startdate%5Bminute%5D=" . $milestonedate->format('i') . "&hour=" .
                              $milestoneenddate->format('G') . "&minute=" . $milestoneenddate->format('i') .
                              "&type=0&mgroup=0&title=" .
-                             $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1&moffset=" .
-                             $offset . "&moption=" . $option . "email&completed=" . $completed . "\"";
+                             $title . "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1" .
+                             "email&completed=" . $completed . "\"";
 
         $result = planner_milestone_lib::planner_milestone($this->context->id, $formdatacompleted);
         external_api::clean_returnvalue(planner_milestone_lib::planner_milestone_returns(), $result);
