@@ -104,10 +104,10 @@ class form_helper {
         $timearr     = self::get_hours_minutes_array();
         $hours       = $timearr['hours'];
         $minutes     = $timearr['minutes'];
-        $timearray   = array();
+        $timearray   = [];
         $timearray[] =& $mform->createElement('select', $groupname . 'hour', get_string('set_hour', $component), $hours);
         $timearray[] =& $mform->createElement('select', $groupname . 'minute', get_string('set_minute', $component), $minutes);
-        $mform->addGroup($timearray, $groupname, get_string('set_endtime', $component), array(' '), false);
+        $mform->addGroup($timearray, $groupname, get_string('set_endtime', $component), [' '], false);
         $mform->addHelpButton($groupname, 'set_endtime', $component);
     }
 
@@ -117,7 +117,7 @@ class form_helper {
      * @return array
      */
     public static function get_hours_minutes_array() {
-        $hours = array();
+        $hours = [];
         foreach (range(0, 23, 1) as $hour) {
             if ($hour < 10) {
                 array_push($hours, "0" . $hour);
@@ -125,7 +125,7 @@ class form_helper {
                 array_push($hours, $hour);
             }
         }
-        $minutes = array();
+        $minutes = [];
         foreach (range(0, 59, 1) as $minute) {
             if ($minute < 10) {
                 array_push($minutes, "0" . $minute);

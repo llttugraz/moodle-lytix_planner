@@ -45,10 +45,10 @@ class planner_milestone_lib extends \external_api {
      */
     public static function planner_milestone_parameters() {
         return new \external_function_parameters(
-            array(
+            [
                 'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
-                'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).', VALUE_REQUIRED)
-            )
+                'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).', VALUE_REQUIRED),
+            ]
         );
     }
 
@@ -59,7 +59,7 @@ class planner_milestone_lib extends \external_api {
     public static function planner_milestone_returns() {
         return new \external_single_structure(
             [
-                'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED)
+                'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED),
             ]
         );
     }
@@ -78,14 +78,14 @@ class planner_milestone_lib extends \external_api {
         global $DB;
         $params  = self::validate_parameters(self::planner_milestone_parameters(), [
             'contextid' => $contextid,
-            'jsonformdata' => $jsonformdata
+            'jsonformdata' => $jsonformdata,
         ]);
 
         // We always must call validate_context in a webservice.
         $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
         self::validate_context($context);
 
-        $data = array();
+        $data = [];
         $serialiseddata = json_decode($params['jsonformdata']);
         parse_str($serialiseddata, $data);
 
@@ -149,7 +149,7 @@ class planner_milestone_lib extends \external_api {
     public static function planner_delete_milestone_returns() {
         return new \external_single_structure(
                 [
-                        'success' => new \external_value(PARAM_BOOL, 'Milestone deleted', VALUE_REQUIRED)
+                        'success' => new \external_value(PARAM_BOOL, 'Milestone deleted', VALUE_REQUIRED),
                 ]
         );
     }
@@ -173,7 +173,7 @@ class planner_milestone_lib extends \external_api {
                 'contextid' => $contexid,
                 'courseid' => $courseid,
                 'userid' => $userid,
-                'id' => $id
+                'id' => $id,
         ]);
 
         // We always must call validate_context in a webservice.

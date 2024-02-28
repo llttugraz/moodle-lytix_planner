@@ -30,7 +30,7 @@ use core_privacy\local\request\approved_userlist;
 use core_privacy\local\request\contextlist;
 use core_privacy\local\request\userlist;
 use core_privacy\tests\request\content_writer;
-use \core_privacy\local\request\writer;
+use core_privacy\local\request\writer;
 
 
 /**
@@ -48,7 +48,7 @@ class provider implements
      * @param collection $collection empty collection of tables for column translation
      * @return  collection the translated userdata
      */
-    public static function get_metadata(collection $collection) : collection {
+    public static function get_metadata(collection $collection): collection {
 
         $collection->add_database_table("lytix_planner_milestone",
             [
@@ -63,7 +63,7 @@ class provider implements
                 "moffset" => "privacy:metadata:lytix_planner_milestone:moffset",
                 "moption" => "privacy:metadata:lytix_planner_milestone:moption",
                 "completed" => "privacy:metadata:lytix_planner_milestone:completed",
-                "send" => "privacy:metadata:lytix_planner_milestone:send"
+                "send" => "privacy:metadata:lytix_planner_milestone:send",
             ], "privacy:metadata:lytix_planner_milestone"
         );
 
@@ -74,7 +74,7 @@ class provider implements
                 "eventid" => "privacy:metadata:lytix_planner_event_comp:eventid",
                 "completed" => "privacy:metadata:lytix_planner_event_comp:completed",
                 "send" => "privacy:metadata:lytix_planner_event_comp:send",
-                "timestamp" => "privacy:metadata:lytix_planner_event_comp:timestamp"
+                "timestamp" => "privacy:metadata:lytix_planner_event_comp:timestamp",
             ], "privacy:metadata:lytix_planner_event_comp"
         );
 
@@ -83,7 +83,7 @@ class provider implements
                 "userid" => "privacy:metadata:lytix_planner_usr_settings:userid",
                 "courseid" => "privacy:metadata:lytix_planner_usr_settings:courseid",
                 "enable_custom_customization" => "privacy:metadata:lytix_planner_usr_settings:enable_custom_customization",
-                "types" => "privacy:metadata:lytix_planner_usr_settings:types"
+                "types" => "privacy:metadata:lytix_planner_usr_settings:types",
             ], "privacy:metadata:lytix_planner_usr_settings"
         );
 
@@ -95,7 +95,7 @@ class provider implements
                 "assingpoints" => "privacy:metadata:lytix_planner_usr_grade_rep:assingpoints",
                 "totalpoints" => "privacy:metadata:lytix_planner_usr_grade_rep:totalpoints",
                 "maxpoints" => "privacy:metadata:lytix_planner_usr_grade_rep:maxpoints",
-                "lastmodified" => "privacy:metadata:lytix_planner_usr_grade_rep:lastmodified"
+                "lastmodified" => "privacy:metadata:lytix_planner_usr_grade_rep:lastmodified",
             ], "privacy:metadata:lytix_planner_usr_grade_rep"
         );
 
@@ -169,7 +169,7 @@ class provider implements
         // This CONTEXT_SYSTEM could be $userlist->contextid.
         $params = [
             "contextlevel" => CONTEXT_COURSE,
-            "userid" => $contextlist->get_user()->id
+            "userid" => $contextlist->get_user()->id,
         ];
         $dataset = $DB->get_records_sql($courseids, $params);
 
@@ -203,13 +203,13 @@ class provider implements
 
         $params = [
             "contextlevel" => CONTEXT_SYSTEM,
-            "userid" => $userid
+            "userid" => $userid,
         ];
         $contextlist->add_from_sql($roleassignments, $params);
 
         $params = [
             "contextlevel" => CONTEXT_COURSE,
-            "userid" => $userid
+            "userid" => $userid,
         ];
         $contextlist->add_from_sql($roleassignments, $params);
 

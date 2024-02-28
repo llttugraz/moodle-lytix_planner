@@ -44,11 +44,11 @@ class planner_notifications_lib extends \external_api {
      */
     public static function store_course_notification_settings_parameters() {
         return new \external_function_parameters(
-            array(
+            [
                 'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
                 'courseid' => new \external_value(PARAM_INT, 'The course ID', VALUE_REQUIRED),
                 'jsonformdata' => new \external_value(PARAM_RAW, 'Data form from', VALUE_REQUIRED),
-            )
+            ]
         );
     }
 
@@ -80,14 +80,14 @@ class planner_notifications_lib extends \external_api {
         $params  = self::validate_parameters(self::store_course_notification_settings_parameters(), [
             'contextid' => $contextid,
             'courseid' => $courseid,
-            'jsonformdata' => $jsonformdata
+            'jsonformdata' => $jsonformdata,
         ]);
 
         // We always must call validate_context in a webservice.
         $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
         self::validate_context($context);
 
-        $data = array();
+        $data = [];
         $serialiseddata = json_decode($params['jsonformdata']);
         parse_str($serialiseddata, $data);
         if ($data['softlock']) {

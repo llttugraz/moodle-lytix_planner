@@ -45,12 +45,10 @@ class planner_event_lib extends \external_api {
      * @return \external_function_parameters
      */
     public static function planner_event_parameters() {
-        return new \external_function_parameters(
-                array(
-                        'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
-                        'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).', VALUE_REQUIRED)
-                )
-        );
+        return new \external_function_parameters([
+            'contextid'    => new \external_value(PARAM_INT, 'The context id for the course', VALUE_REQUIRED),
+            'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).', VALUE_REQUIRED),
+        ]);
     }
 
     /**
@@ -59,11 +57,9 @@ class planner_event_lib extends \external_api {
      * @return \external_single_structure
      */
     public static function planner_event_returns() {
-        return new \external_single_structure(
-                [
-                        'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED)
-                ]
-        );
+        return new \external_single_structure([
+            'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED),
+        ]);
     }
 
     /**
@@ -81,7 +77,7 @@ class planner_event_lib extends \external_api {
         global $DB, $USER, $COURSE;
         $params = self::validate_parameters(self::planner_event_parameters(), [
                 'contextid'    => $contextid,
-                'jsonformdata' => $jsonformdata
+                'jsonformdata' => $jsonformdata,
         ]);
 
         $lang = current_language();
@@ -90,7 +86,7 @@ class planner_event_lib extends \external_api {
         $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
         self::validate_context($context);
 
-        $data           = array();
+        $data = [];
         $serialiseddata = json_decode($params['jsonformdata']);
         parse_str($serialiseddata, $data);
 
@@ -99,7 +95,7 @@ class planner_event_lib extends \external_api {
 
         $startdate = (new
         \DateTime($data['startdate']['day'] . '-' . $data['startdate']['month'] . '-' . $data['startdate']['year']));
-        $enddate   = (new
+        $enddate = (new
         \DateTime($data['startdate']['day'] . '-' . $data['startdate']['month'] . '-' . $data['startdate']['year']));
 
         $startdate->setTime($data['startdate']['hour'], $data['startdate']['minute']);
@@ -190,10 +186,10 @@ class planner_event_lib extends \external_api {
      */
     public static function planner_event_completed_parameters() {
         return new \external_function_parameters(
-                array(
+                [
                         'contextid'    => new \external_value(PARAM_INT, 'The context id for the course'),
-                        'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).')
-                )
+                        'jsonformdata' => new \external_value(PARAM_RAW, 'The data from the milestone form (json).'),
+                ]
         );
     }
 
@@ -205,7 +201,7 @@ class planner_event_lib extends \external_api {
     public static function planner_event_completed_returns() {
         return new \external_single_structure(
                 [
-                        'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED)
+                        'success' => new \external_value(PARAM_BOOL, 'Milestone updated / inserted', VALUE_REQUIRED),
                 ]
         );
     }
@@ -225,14 +221,14 @@ class planner_event_lib extends \external_api {
         global $DB;
         $params = self::validate_parameters(self::planner_event_completed_parameters(), [
                 'contextid'    => $contextid,
-                'jsonformdata' => $jsonformdata
+                'jsonformdata' => $jsonformdata,
         ]);
 
         // We always must call validate_context in a webservice.
         $context = \context::instance_by_id($params['contextid'], MUST_EXIST);
         self::validate_context($context);
 
-        $data           = array();
+        $data           = [];
         $serialiseddata = json_decode($params['jsonformdata']);
         parse_str($serialiseddata, $data);
 
@@ -289,7 +285,7 @@ class planner_event_lib extends \external_api {
     public static function planner_delete_event_returns() {
         return new \external_single_structure(
                 [
-                        'success' => new \external_value(PARAM_BOOL, 'Event deleted', VALUE_REQUIRED)
+                        'success' => new \external_value(PARAM_BOOL, 'Event deleted', VALUE_REQUIRED),
                 ]
         );
     }
@@ -314,7 +310,7 @@ class planner_event_lib extends \external_api {
                 'contextid' => $contexid,
                 'courseid'  => $courseid,
                 'userid'    => $userid,
-                'id'        => $id
+                'id'        => $id,
         ]);
 
         // We always must call validate_context in a webservice.

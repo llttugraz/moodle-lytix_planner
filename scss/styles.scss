@@ -1,0 +1,247 @@
+//Create colour variables, names as per planner.js
+$primaryMarkerColour: #a09e9e;
+$indicatorColour: #888686;
+$fontColour: #fefefe;
+$indicatorStrokeColour: #595656;
+$stillDueColour: #474747;
+$milestoneColour: #df3540;
+$completedColour: #b2c204;
+$thresholdColour: #f9a606;
+$borderColour: rgba(0,0,0,0.15);
+$shadowColour: rgba(0,0,0,0.2);
+
+
+// Scrollbar for when not viewing all months
+#PlannerWidget {
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    // Track
+    &::-webkit-scrollbar-track {
+        background: $fontColour;
+    }
+
+    // Handle
+    &::-webkit-scrollbar-thumb {
+        background: $indicatorColour;
+    }
+
+    // Handle on hover
+    &::-webkit-scrollbar-thumb:hover {
+        background: $indicatorStrokeColour;
+        cursor: pointer;
+    }
+}
+//Style for the planner description
+#planner_description {
+    background-color: rgba(231, 240, 241, .75);
+    font-style: italic;
+    font-size: 1rem;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+// Dropdown Content (Hidden by Default)
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-color: $indicatorStrokeColour;
+    border: 1px;
+    min-width: 210px;
+    box-shadow: 0 8px 16px 0 $shadowColour;
+    z-index: 1;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+// Popup to appear wherever merge element is clicked
+#planner-mergePopup {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border: 1px solid $borderColour;
+    border-radius: 2%;
+    box-shadow: 0 0 10px $shadowColour;
+    padding: 10px;
+    left: calc(50% - 137px); /*Place it at the center of the screen*/
+    top: 100px;
+    width: 275px; /*Should have a fixed width*/
+    max-height: 225px;
+    overflow-y: scroll;
+}
+
+// First line in the tooltip, event type and name
+.planner-eventTitleTooltip {
+    font-weight: bold;
+}
+
+// Styling the regular tooltip
+.planner-hoverBack {
+    border: 1px solid $borderColour;
+    border-radius: 2%;
+    box-shadow: 0 0 10px $shadowColour;
+}
+
+
+//Links/Elements inside popup
+.planner-popupDropdownItem a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+.planner-popupDropdownItem {
+    padding: 0;
+    cursor: pointer;
+}
+
+// Links inside the dropdown
+.dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover {
+    // Show the dropdown menu on hover
+    .dropdown-content {
+        display: block;
+    }
+}
+
+#planner-svg {
+    z-index: -1;
+}
+
+// Styling checkboxes
+#planner_options form input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    border: 0.15em solid $stillDueColour;
+    border-radius: 0.15em;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 2px;
+    top: 2.5px;
+    accent-color: $stillDueColour; /* stylelint-disable-line */
+    float: left;
+}
+
+#planner_options form label {
+    text-align: left;
+    margin-right: 12px;
+}
+#planner_options form {
+    text-align: left;
+    z-index: 3;
+}
+
+.planner-checkBtn {
+    font-size: 15px;
+    color: white;
+    background-color: $indicatorColour;
+    border: 2px solid $borderColour;
+    padding: 5px;
+    cursor: pointer;
+    margin: 8px 12px 4px 4px;
+}
+
+#planner-check {
+    display: none;
+}
+#planner-infoMobile {
+    display: none;
+}
+
+@media screen and (max-width: 767px){
+    #PlannerWidget::-webkit-scrollbar {
+        display: none;
+    }
+    #planner-check {
+        display: block;
+    }
+    #planner-infoMobile {
+        display: block;
+    }
+    #planner-mergePopup {
+        top: 200px;
+    }
+    #planner_options form, #planner-info {
+        position: absolute;
+        background-color: $indicatorColour;
+        border: 2px solid $borderColour;
+        border-radius: 2%;
+        box-shadow: 0 0 10px $shadowColour;
+        color: white;
+        width: 100%;
+        left: -150%;
+        text-align: left;
+        transition: all .5s;
+        z-index: 3;
+    }
+    #planner_options form input[type="checkbox"] {
+        vertical-align: middle;
+        position: relative;
+        bottom: 1px;
+        margin-left: 10px;
+    }
+    #planner_options form label {
+        padding-top: 5px;
+        display: block;
+    }
+    #planner_options {
+        width: 50%;
+        height: 100px;
+    }
+
+    #planner_legend {
+        height: 0;
+    }
+
+    #planner_actions {
+        position: absolute;
+        right: 10px;
+        width: 50%;
+    }
+    #planner_actions .planner-viewDropdown {
+        display: none;
+    }
+    #planner_menu {
+        height: 100px;
+    }
+
+
+    #planner_view #planner_left {
+        display: none;
+    }
+    #planner_view #planner_right {
+        display: none;
+    }
+
+    .planner-mobileArrows {
+        position: relative;
+        height: 80px;
+        width: 100%;
+        margin: 0 0 0 0;
+    }
+
+    #planner_view .planner-mobileMonth {
+        position: absolute;
+        font-size: 20px;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 45px;
+        text-align: center;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #planner_options {
+        width: 75%;
+    }
+}

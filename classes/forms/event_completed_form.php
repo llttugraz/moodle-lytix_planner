@@ -143,9 +143,7 @@ class event_completed_form extends moodleform {
 
         $mform->addElement('advcheckbox', 'completed', get_string('set_completed', $component));
         $mform->setDefault('completed', $record->completed);
-        $mform->addHelpButton('completed', 'set_completed', $component);
 
         $mform->addElement('hidden', 'timestamp', time());
-
     }
 }

@@ -32,48 +32,52 @@ $string['cron_send_planner_notifications'] = 'Send Planner Notifications Task fo
 $string['cron_send_planner_report_notifications'] = 'Send planner report notification task for subplugin lytix_planner';
 
 // Planner.
+
 $string['Planner'] = 'Planner';
-$string['Milestone'] = 'Milestone';
-$string['Lecture'] = 'Lecture';
-$string['Exam'] = 'Exam';
-$string['Quiz'] = 'Quiz';
-$string['Assignment'] = 'Assignment';
-$string['Feedback'] = 'Feedback';
-$string['Interview'] = 'Student\'s interview';
-$string['Other'] = 'Other';
+$string['description_teacher'] = 'Overview of all course events. Adjust the zoom level to display specific timeframes.';
+$string['description_student'] = 'Overview of all course events and milestones you have added. Adjust the zoom level to display specific timeframes.';
+$string['Milestone'] = 'Milestone(s)';
+$string['Lecture'] = 'Lecture(s)';
+$string['Exam'] = 'Exam(s)';
+$string['Quiz'] = 'Quiz(zes)';
+$string['Assignment'] = 'Assignment(s)';
+$string['Feedback'] = 'Feedback(s)';
+$string['Interview'] = 'Student’s interview(s)';
+$string['Other'] = 'Other Event(s)';
+
 $string['add_milestone'] = 'Add Milestone';
 $string['add_event'] = 'Add Event';
 $string['event'] = 'Event';
 $string['event_completed'] = 'Event completed?';
+$string['serial_event'] = 'Create serial event';
 $string['open_settings'] = 'Settings';
-$string['set_date'] = 'Select the date:';
-$string['set_date_help'] = 'Select a due date for this milestone';
-$string['set_startdate'] = 'Select the date:';
-$string['set_startdate_help'] = 'Select a due date for this milestone';
-$string['due_date'] = 'Date: ';
+$string['set_date'] = 'Event date:';
+$string['set_date_help'] = 'Set a date and time for the start of this event. Can be the same as end date to only enter a deadline.';
+$string['set_startdate'] = 'Event date:';
+$string['set_startdate_help'] = 'Set a date and time for the start of this event. Can be the same as end date to only enter a deadline.';
+$string['due_date'] = 'Event date: ';
 $string['type_lecture'] = 'Lecture';
 $string['type_quiz'] = 'Quiz';
 $string['type_assignment'] = 'Assignment';
 $string['type_feedback'] = 'Feedback';
 $string['type_exam'] = 'Exam';
-$string['type_interview'] = 'Student\'s interview';
+$string['type_interview'] = 'Student’s interview';
 $string['type_other'] = 'Other';
-$string['set_type'] = 'Select a type:';
-$string['set_type_help'] = 'Select one of these types for your milestone. If these types do not fit your goal,
+$string['set_type'] = 'Event type:';
+$string['set_type_help'] = 'Select one of these types for your event. If these types do not fit your goal,
                              please contact our support team.';
 
 $string['set_select_group'] = 'Select a group';
-$string['set_select_group_help'] = 'Select one of these grops to create a event for their members.
-                                    \"no group\" creates the event for all participants.';
+$string['set_select_group_help'] = 'Select a group to create a group event. “no group” creates an event for all participants.';
 $string['no_group'] = 'no group';
-$string['set_title'] = 'Write a title:';
-$string['set_title_help'] = 'Write a title for this milestone in the box provided.';
-$string['set_text'] = 'Write a text:';
-$string['set_text_help'] = 'Write a short text describing this milestone in the box provided.';
-$string['set_visible'] = 'Is this event visible?';
-$string['set_visible_help'] = 'Should this milestone be visible for the students?';
-$string['set_mandatory'] = 'Is this event mandatory?';
-$string['set_mandatory_help'] = 'Should this milestone be mandatory for the students?';
+$string['set_title'] = 'Event title:';
+$string['set_title_help'] = 'Write a title for this event in the box provided.';
+$string['set_text'] = 'Event description:';
+$string['set_text_help'] = 'Write a short text describing this event in the box provided.';
+$string['set_visible'] = 'Event visible for students?';
+$string['set_visible_help'] = 'Should this event be visible for the students?';
+$string['set_mandatory'] = 'Event compulsory for students?';
+$string['set_mandatory_help'] = 'Should this event be mandatory for the students?';
 $string['set_graded'] = 'Will this event be graded?';
 $string['set_graded_help'] = 'Will this event be graded for students?';
 $string['set_points'] = 'Points achieved:';
@@ -83,39 +87,50 @@ $string['get_send_help'] = 'If active, a notification was send to the participan
 $string['set_delete'] = 'Delete this milestone?';
 $string['set_delete_help'] = 'Are you sure you want to delete this milestone?  You can not undo this.';
 $string['mandatory'] = '<div class="alert alert-warning">This event is mandatory!!!</div>';
-$string['set_completed'] = 'Is this task completed?';
+$string['set_completed'] = 'Have you completed this event?';
 $string['set_completed_help'] = 'Check this box if you did all required tasks.';
 $string['set_new_type'] = 'Add new event type';
 $string['set_new_type_help'] = 'Do you want to add an event type?';
-$string['set_select_other_german'] = 'Event type in german:';
-$string['set_select_other_german_help'] = 'How should the new event appear in german?';
-$string['set_select_other_english'] = 'Event type in english:';
-$string['set_select_other_english_help'] = 'How should the new event appear in english?';
-$string['set_delete_type'] = 'Do you want to delete this event type?';
-$string['set_hour'] = 'Select the hour of the endtime: ';
-$string['set_minute'] = 'Select the minute of the endtime:';
-$string['set_endtime'] = 'Endtime:';
-$string['set_endtime_help'] = 'Select the end time (hour and minute) for this event.';
+$string['set_select_other_german'] = 'Event type in German:';
+$string['set_select_other_german_help'] = 'How should the new event appear in German?';
+$string['set_select_other_english'] = 'Event type in English:';
+$string['set_select_other_english_help'] = 'How should the new event appear in English?';
+$string['set_delete_type'] = 'Delete event type?';
+$string['set_hour'] = 'Select the hour of the end time: ';
+$string['set_minute'] = 'Select the minute of the end time:';
+$string['set_endtime'] = 'End time:';
+$string['set_endtime_help'] = 'Set an end time for this event. Can be the same as start date to only enter a deadline';
 $string['set_room'] = 'Room:';
 $string['set_room_help'] = 'Write the room name in the field or paste the link to the room.';
 $string['set_gradeitem'] = 'Points:';
 $string['set_gradeitem_help'] = 'Link a selected grade element to this event.';
-$string['costum_settings'] = 'Costum course settings';
+$string['costum_settings'] = 'Custom course settings';
 $string['connect_gradebook'] = 'Do not create a link to the gradebook';
 $string['countcompleted'] = 'Completion:';
+$string['completed_by'] = 'Completed by';
+$string['students'] = 'students';
 $string['countcompleted_help'] = 'Shows how many students have already completed the event.';
 
 // Legend.
-$string['legend'] = '<b>mandatory</b> events have a black outline, <b>graded</b> events are marked with <b>*</b>';
+$string['legend'] = '<b>graded</b> events are underlined, <b>mandatory</b> events are marked with <b>*</b>';
+
+// Different views.
+$string['view'] = 'Zoom level';
+$string['month'] = 'MONTH';
+$string['months'] = 'MONTHS';
+$string['next'] = 'Next month';
+$string['previous_month'] = 'Previous month';
+$string['options'] = 'Options';
+$string['calendarweek'] = 'CW';
 
 // Modal warning.
 $string['title_required'] = 'A title is required.';
-$string['type_exists'] = '<div class="alert alert-danger">The eventtype already exists.</div>';
-$string['type_required'] = '<div class="alert alert-danger">An eventtype in english and german is required.</div>';
+$string['type_exists'] = '<div class="alert alert-danger">The event type already exists.</div>';
+$string['type_required'] = '<div class="alert alert-danger">An event type in English and German is required.</div>';
 $string['type_not_deleteable'] = '<div class="alert alert-danger">The event type cannot be deleted because an event with this type already exists.
                                                                   Delete the event before deleting the event type.</div>';
 $string['event_limit'] = '<div class="alert alert-danger">Limit for events on this day already reached.</div>';
-$string['time_smaller'] = '<div class="alert alert-danger">Endtime is smaller than starttime!</div>';
+$string['time_smaller'] = '<div class="alert alert-danger">End time is smaller than start time!</div>';
 $string['timeoutofrange'] = '<div class="alert alert-danger">The selected time is not in the time range of the course.</div>';
 
 // Planner - Settings.
@@ -123,12 +138,12 @@ $string['enable_course_notifications'] = 'Enable Notifications';
 $string['enable_course_notifications_help'] = 'Enable notifications to the students of this course.';
 $string['enable_user_customization'] = 'Allow personalized Notifications';
 $string['enable_user_customization_help'] = 'Once activ, the students can configure their settings for the notification.';
-$string['start_time'] = 'Select a startdate:';
+$string['start_time'] = 'Start date:';
 $string['start_time_help'] = 'Select a startdate. Once this day is reached, the students receive notifications';
-$string['end_time'] = 'Select a enddate:';
+$string['end_time'] = 'End date:';
 $string['end_time_help'] = 'Select a enddate. Once this day is reached, the students no longer receive notifications';
 $string['softlock']  = 'Unlock settings';
-$string['softlock_help'] = 'Security checkbox to prevent unintended change of settings. Check this box first if the settings for this course has to be changed.';
+$string['softlock_help'] = 'Tick box to change settings. Prevents accidental changes.';
 $string['offset'] = 'Select Offset(Days):';
 $string['offset_help'] = 'Select a offset. The students will receive notifications X days before the deadline.';
 $string['enable_custom_customization'] = "Configure Personal Notifications";

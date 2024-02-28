@@ -51,7 +51,7 @@ class milestone_form extends moodleform {
         $component = 'lytix_planner';
         $mform     = $this->_form; // Don't forget the underscore!
 
-        $minutes = array();
+        $minutes = [];
         foreach (range(0, 59, 1) as $minute) {
             if ($minute < 10) {
                 array_push($minutes, "0" . $minute);
@@ -60,7 +60,7 @@ class milestone_form extends moodleform {
             }
         }
 
-        $hours = array();
+        $hours = [];
         foreach (range(0, 23, 1) as $hour) {
             if ($hour < 10) {
                 array_push($hours, "0" . $hour);
@@ -86,23 +86,23 @@ class milestone_form extends moodleform {
         $mform->setDefault('startdate', $this->_customdata['startdate']);
         $mform->addHelpButton('startdate', 'set_startdate', $component);
 
-        $timearray   = array();
+        $timearray   = [];
         $timearray[] =& $mform->createElement('select', 'hour', get_string('set_hour', $component), $hours);
         $timearray[] =& $mform->createElement('select', 'minute', get_string('set_minute', $component), $minutes);
 
-        $mform->addGroup($timearray, 'endtime', get_string('set_endtime', $component), array(' '), false);
+        $mform->addGroup($timearray, 'endtime', get_string('set_endtime', $component), [' '], false);
         $mform->addHelpButton('endtime', 'set_endtime', $component);
 
         form_helper::set_enddate($mform, 'startdate', '', $this->_customdata['enddate']);
 
-        $mform->addElement('text', 'title', get_string('set_title', $component), array('size' => '80'));
+        $mform->addElement('text', 'title', get_string('set_title', $component), ['size' => '80']);
         $mform->setDefault('title', $this->_customdata['title']);
         $mform->addRule('title', get_string('title_required', $component), 'required', null, 'client');
         $mform->addHelpButton('title', 'set_title', $component);
 
         $mform->addElement('editor', 'text', get_string('set_text', $component), 'wrap="virtual" rows="10" cols="80"',
-            array('autosave' => 0, 'enable_filemanagement' => 0));
-        $mform->setDefault('text', array('text' => $this->_customdata['text']));
+            ['autosave' => 0, 'enable_filemanagement' => 0]);
+        $mform->setDefault('text', ['text' => $this->_customdata['text']]);
         $mform->setType('text', PARAM_CLEANHTML);
         $mform->addHelpButton('text', 'set_text', $component);
 

@@ -438,6 +438,6 @@ class planner_get_test extends externallib_advanced_testcase {
             "&type=0&mgroup=0&title=" . $title . $englishstr . $germanstr .$deletestr .
             "&text%5Btext%5D=&text%5Bformat%5D=1&room%5Btext%5D=&room%5Bformat%5D=1&visible=0&visible=" .
             $visible . "&mandatory=" . $mandatory . "&graded=" . $graded . "\"";
-        return array($eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata);
+        return [$eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata];
     }
 }

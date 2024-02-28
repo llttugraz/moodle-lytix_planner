@@ -37,8 +37,8 @@ class notification_settings {
      * @return false|string
      */
     public static function get_default_types() {
-        $optionsgerman = array('Vorlesung', 'Quiz', 'Aufgabe', 'Feedback', 'Prüfung', 'Abgabegespräch', 'Sonstiges');
-        $optionsenglish = array('Lecture', 'Quiz', 'Assignment', 'Feedback', 'Exam', 'Interview', 'Other');
+        $optionsgerman = ['Vorlesung', 'Quiz', 'Aufgabe', 'Feedback', 'Prüfung', 'Abgabegespräch', 'Sonstiges'];
+        $optionsenglish = ['Lecture', 'Quiz', 'Assignment', 'Feedback', 'Exam', 'Interview', 'Other'];
         $stdtypes         = [
             'de' => $optionsgerman,
             'en' => $optionsenglish,

@@ -112,7 +112,7 @@ class planner_get extends \external_api {
         $params = self::validate_parameters(self::service_parameters(), [
                 'id'        => $id,
                 'contextid' => $contextid,
-                'isstudent' => $isstudent
+                'isstudent' => $isstudent,
         ]);
 
         $lang = current_language();

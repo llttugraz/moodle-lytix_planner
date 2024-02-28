@@ -22,16 +22,15 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2023111500; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires = 2021051700; // Requires this Moodle version 3.11.
-$plugin->component = 'lytix_planner'; // Full name of the plugin.
+$plugin->version = 2024022800;
+$plugin->requires = 2021051700;
+$plugin->component = 'lytix_planner';
 $plugin->dependencies = [
     'lytix_logs' => ANY_VERSION,
     'lytix_helper' => ANY_VERSION,
 ];
-$plugin->release   = 'v1.1.0';
-$plugin->maturity  = MATURITY_STABLE;
+$plugin->release = 'v2.0.0';
+$plugin->maturity = MATURITY_STABLE;
 $plugin->supported = [401, 403];

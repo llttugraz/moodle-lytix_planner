@@ -51,7 +51,7 @@ class dynamic_events {
      * @param string $typeenglish
      * @throws \dml_exception
      */
-    public static function  set_event_types($courseid, $typegerman, $typeenglish) {
+    public static function set_event_types($courseid, $typegerman, $typeenglish) {
         global $DB;
         // TODO check if type already exists. If not retrun new types, else return false.
         $record      = notification_settings::test_and_set_course($courseid);

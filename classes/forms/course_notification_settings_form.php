@@ -86,10 +86,10 @@ class course_notification_settings_form extends \moodleform {
             $mform->addElement('header', 'header_' . $typenameen, $types['en'][$i] . ' - ' . $types['de'][$i]);
             $mform->disabledIf('header_' . $typenameen, 'softlock', 'notchecked');
 
-            $mform->addElement('text', 'english' . $typenameen, '[EN] ' . $types['en'][$i], array('size' => '40'));
+            $mform->addElement('text', 'english' . $typenameen, '[EN] ' . $types['en'][$i], ['size' => '40']);
             $mform->setDefault('english' . $typenameen, $types['en'][$i]);
             $mform->disabledIf('english' . $typenameen, 'softlock', 'notchecked');
-            $mform->addElement('text', 'german' . $typenameen, '[DE] ' . $types['de'][$i], array('size' => '40'));
+            $mform->addElement('text', 'german' . $typenameen, '[DE] ' . $types['de'][$i], ['size' => '40']);
             $mform->setDefault('german' . $typenameen, $types['de'][$i]);
             $mform->disabledIf('german' . $typenameen, 'softlock', 'notchecked');
 

@@ -212,7 +212,7 @@ class provider_test extends provider_testcase {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function privacy_delte_users_sub_test(\stdClass $user) : bool {
+    public static function privacy_delte_users_sub_test(\stdClass $user): bool {
         global $DB;
         $privacy = new privacy\provider();
         $context = new contextlist();
@@ -233,7 +233,7 @@ class provider_test extends provider_testcase {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function privacy_get_users_sub_test(\stdClass $user) : bool {
+    public static function privacy_get_users_sub_test(\stdClass $user): bool {
         $privacy = new privacy\provider();
         $context = new contextlist();
         $context->add_system_context();
@@ -248,7 +248,7 @@ class provider_test extends provider_testcase {
      * @param \stdClass $context
      * @return bool
      */
-    public static function privacy_get_context_sub_test(\stdClass $user, \stdClass $context) : bool {
+    public static function privacy_get_context_sub_test(\stdClass $user, \stdClass $context): bool {
         // Contextid by parameter because we need the context of the course.
         $privacy = new privacy\provider();
         $contexts = array_flip($privacy::get_contexts_for_userid($user->id)->get_contextids());
@@ -262,7 +262,7 @@ class provider_test extends provider_testcase {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function privacy_delete_context_sub_test() : bool {
+    public static function privacy_delete_context_sub_test(): bool {
         global $DB;
         $privacy = new privacy\provider();
         $privacy::delete_data_for_all_users_in_context(\context_system::instance());
@@ -277,7 +277,7 @@ class provider_test extends provider_testcase {
      * @param string $component
      * @return bool
      */
-    public static function privacy_get_metadata_sub_test(string $component) : bool {
+    public static function privacy_get_metadata_sub_test(string $component): bool {
         $collection = new collection($component);
         $privacy = new privacy\provider();
         $collection = $privacy::get_metadata($collection);
@@ -295,7 +295,7 @@ class provider_test extends provider_testcase {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function privacy_delete_context_user_sub_test(\stdClass $user, string $component) : bool {
+    public static function privacy_delete_context_user_sub_test(\stdClass $user, string $component): bool {
         global $DB;
         $privacy = new privacy\provider();
         $component = "{".$component."}";

@@ -38,16 +38,31 @@
 
 <div class='widget'>
     <h3 class='p-1 pl-3 m-0'>Planner</h3>
-
+    <p id="planner_description" class='p-3'></p>
     <div class='p-3'>
-        <div id="planner_menu"></div>
-        <div id="PlannerWidget" class="w-100 pl-3 overflow-hidden"></div>
-        <div id="planner_legend"></div>
+        <div id="planner_menu" class="row">
+            <div id="planner_options" class="col-md-6">
+            </div>
+
+            <div id="planner_actions" class="col-md-6"></div>
+
+        </div>
+        <div id="planner_view" class="row">
+            <div id="planner_left" class="col-md-1"></div>
+            <div id="PlannerWidget" class="w-100 col-md-10 p-0"></div>
+            <div id="planner_right" class="col-md-1"></div>
+            <div id="planner-mergePopup"></div>
+        </div>
+        <div id="planner_sum">
+            <div id="planner_legend"></div>
+
+        </div>
+
     </div>
 </div>
 
 {{#js}}
-    require(['lytix_planner/planner'], function(m) {
-        m.init({{contextid}}, {{courseid}}, {{userid}}, {{isteacher}});
+    require(['lytix_planner/planner-lazy'], m => {
+        m.init({{contextid}}, {{courseid}}, {{userid}}, {{isteacher}}, '{{{locale}}}');
     });
 {{/js}}
