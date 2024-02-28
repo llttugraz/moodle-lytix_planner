@@ -1,7 +1,9 @@
 # lytix_planner
 
-This plugin is a subplugin of [local_lytix](https://github.com/llttugraz/moodle-local_lytix).
-This plugin helps the students and teachers to plan and organize the course dates.
+This plugin is a subplugin of [local_lytix](https://github.com/llttugraz/moodle-local_lytix);
+it helps students and teachers to plan and organize events.
+
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -48,9 +50,9 @@ Explain how to use the plugin with step-by-step instructions and provide screens
 
 ## Dependencies
 
- - [local_lytix](https://github.com/llttugraz/moodle-local_lytix).
- - [lytix_config](https://github.com/llttugraz/moodle-lytix_config).
- - [lytix_logs](https://github.com/llttugraz/moodle-lytix_logs).
+- [local_lytix](https://github.com/llttugraz/moodle-local_lytix)
+- [lytix_config](https://github.com/llttugraz/moodle-lytix_config)
+- [lytix_logs](https://github.com/llttugraz/moodle-lytix_logs)
 
 ## API Documentation
 
@@ -69,14 +71,6 @@ Detail what personal data the plugin stores and how it handles this data.
 **Q:** Frequently asked question here?
 **A:** Answer to the question here.
 
-**Q:** Another frequently asked question?
-**A:** Answer to the question here.
-
-## Known Issues
-
-- Issue 1: Solution or workaround for the issue.
-- Issue 2: Solution or workaround for the issue.
-
 ## License
 
 This plugin is licensed under the [GNU GPL v3](https://github.com/llttugraz/moodle-lytix_planner?tab=GPL-3.0-1-ov-file).
@@ -84,4 +78,3 @@ This plugin is licensed under the [GNU GPL v3](https://github.com/llttugraz/mood
 ## Contributors
 
 - **Günther Moser** - Developer - [GitHub](https://github.com/ghinta)
-- **Alex Kremser** - Developer - [GitHub](https://github.com/llt-tuggy)
