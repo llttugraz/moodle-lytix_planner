@@ -39,7 +39,7 @@ use externallib_advanced_testcase;
  * @runTestsInSeparateProcesses
  * @coversDefaultClass \lytix_planner\planner_notifications_lib
  */
-class planner_notifications_lib_test extends externallib_advanced_testcase {
+final class planner_notifications_lib_test extends externallib_advanced_testcase {
     /**
      * Variable for course.
      *
@@ -58,6 +58,7 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
      * Setup called before any test case.
      */
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest(true);
         $this->setAdminUser();
         global $CFG;
@@ -89,7 +90,7 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_store_course_notification_settings() {
+    public function test_store_course_notification_settings(): void {
         $jsonformdata = $this->generate_course_jsonformdata(0, 0, 0, 0);
 
         $result = planner_notifications_lib::store_course_notification_settings(
@@ -110,7 +111,7 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_store_course_notification_settings_rename() {
+    public function test_store_course_notification_settings_rename(): void {
         $jsonformdata = $this->generate_course_jsonformdata(0, 0, 0, 1);
 
         $result = planner_notifications_lib::store_course_notification_settings(
@@ -131,7 +132,7 @@ class planner_notifications_lib_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_store_course_notification_settings_delete() {
+    public function test_store_course_notification_settings_delete(): void {
         $jsonformdata = $this->generate_course_jsonformdata(0, 0, 1, 0);
 
         $result = planner_notifications_lib::store_course_notification_settings(
