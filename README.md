@@ -12,10 +12,15 @@ it helps students and teachers to plan and organize events.
 
 ## Requirements
 
-- Moodle Version: 4.1+
-- PHP Version: 7.4+
-- Supported Databases: MariaDB, PostgreSQL
-- Supported Moodle Themes: Boost
+## Requirements
+
+- Supported Moodle Version: 4.1 - 4.5
+- Supported PHP Version:    7.4 - 8.3
+- Supported Databases:      MariaDB, PostgreSQL
+- Supported Moodle Themes:  Boost
+
+This plugin has only been tested under the above system requirements against the specified versions.
+However, it may work under other system requirements and versions as well.
 
 ## Features
 
@@ -27,7 +32,7 @@ No settings for the subplugin are available.
 
 ## Usage
 
-The provided widget of this subplugin is part of the LYTIX operation mode `Learner's Corner`. We refer to [local_lytix](https://github.com/llttugraz/moodle-local_lytix) for the configuration of this operation mode. If the mode `Learner's Corner` is active  and if a course is in the list of supported courses for this mode, then this widget is displayed when clicking on `Learner's Corner` in the main course view.
+The provided widget of this subplugin is part of the LYTIX operation modes `Learner's Corner` and `Course Dashboard`. We refer to [local_lytix](https://github.com/llttugraz/moodle-local_lytix) for the configuration of this operation modes. If the mode `Learner's Corner` or `Course Dashboard` is active  and if a course is in the list of supported courses for this mode, then this widget is displayed when clicking on `Learner's Corner` \ `Course Dashboard` in the main course view.
 
 ## API Documentation
 
