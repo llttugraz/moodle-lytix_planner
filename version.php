@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024022800;
+$plugin->version = 2024110805;
 $plugin->requires = 2021051700;
 $plugin->component = 'lytix_planner';
 $plugin->dependencies = [
