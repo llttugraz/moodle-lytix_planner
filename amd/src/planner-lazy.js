@@ -2,7 +2,6 @@ import Ajax from 'core/ajax';
 import ModalFactory from 'core/modal_factory';
 import ModalEvents from 'core/modal_events';
 import {loadFragment} from 'core/fragment';
-import Yui from 'core/yui';
 import {get_string as getString} from 'core/str';
 import {makeLoggingFunction} from 'lytix_logs/logs';
 import Log from 'core/log';
@@ -848,7 +847,13 @@ const planner = {
     },
 
     drawLoading: function() {
-        const img = '<img src="../../../pix/i/loading.gif" ' +
+        var imgtype;
+        if (Number(M.cfg.version) < 2024042200) {
+            imgtype = "gif";
+        } else {
+            imgtype = "svg";
+        }
+        const img = '<img src="../../../pix/i/loading.' + imgtype + '" ' +
             'alt="LoadingImage" style="width:48px;height:48px;">';
 
         svgcontainer.innerHTML = img + ' ' + planner.strings.loading_msg;
@@ -2140,20 +2145,6 @@ const planner = {
 
         const actionForm = document.createElement('form');
         if (!planner.isteacher) {
-            let promises = Ajax.call([
-                {
-                    methodname: 'lytix_planner_allow_personalized_notifications',
-                    args: {contextid: planner.contextid, courseid: planner.courseid},
-                }
-            ]);
-            promises[0].then(function(response) {
-                if (response.allow) {
-                    actionForm.appendChild(planner.addNotificationUserSettingsBtn());
-                }
-                return;
-            }).catch(function(ex) {
-                Log.warn(ex);
-            });
             actionForm.appendChild(planner.addMilestoneBtn());
         } else {
             actionForm.appendChild(planner.addNotificationCourseSettingsBtn());
@@ -2167,9 +2158,11 @@ const planner = {
     },
 
     resetModal: function() {
-        Yui.use('moodle-core-formchangechecker', function() {
-            M.core_formchangechecker.reset_form_dirty_state();
+        require(['core_form/changechecker'], function(ChangeChecker) {
+            ChangeChecker.startWatching();
+            ChangeChecker.resetAllFormDirtyStates();
         });
+
         // Reload that changes in view are done and a new fresh modal is created.
         planner.update();
     },
@@ -2230,11 +2223,20 @@ const planner = {
     createEventModal: function(item) {
         const form = loadFragment('lytix_planner', 'new_event_form', planner.contextid, item);
         const title = planner.strings.event;
-        ModalFactory.create({
-            type: ModalType,
-            title: title,
-            body: form,
-        }).then(function(modal) {
+        let m;
+        if (Number(M.cfg.version) < 2024042200) {
+            m = ModalFactory.create({
+                type: ModalType,
+                title: title,
+                body: form,
+            });
+        } else {
+            m = ModalType.create({
+                title: title,
+                body: form,
+            });
+        }
+        m.then(function(modal) {
             // Forms are big, we want a big modal.
             modal.setLarge();
             modal.show();
@@ -2388,65 +2390,6 @@ const planner = {
             Log.warn(ex);
         });
     },
-
-    createUserSettingsModal: function() {
-        // Set correct userid.
-        const params = {};
-        params.userid = planner.userid;
-        params.courseid = planner.courseid;
-        const form = loadFragment('lytix_planner', 'new_user_notification_settings_form',
-            planner.contextid, params);
-
-        const title = planner.strings.open_settings;
-        ModalFactory.create({
-            type: ModalFactory.types.SAVE_CANCEL,
-            title: title,
-            body: form,
-        }).then(function(modal) {
-            // Forms are big, we want a big modal.
-            modal.setLarge();
-            modal.show();
-            const root = modal.getRoot();
-            root.on(ModalEvents.save, function() {
-                // Convert all the form elements values to a serialised string.
-                const formData = root.find('form').serialize();
-                // Call the webservice with formData as param.
-                const promises = Ajax.call([
-                    {
-                        methodname: 'lytix_planner_store_user_notification_settings',
-                        args: {
-                            contextid: planner.contextid,
-                            courseid: planner.courseid,
-                            userid: planner.userid,
-                            jsonformdata: JSON.stringify(formData)
-                        },
-                    }
-                ]);
-                promises[0].then(function(response) {
-                    if (!response.success) {
-                        Log.warn('Error storing user notification settings!');
-                    }
-                    planner.resetModal();
-                    return;
-                }).catch(function(ex) {
-                    Log.warn(ex);
-                    planner.resetModal();
-                });
-            });
-            root.on(ModalEvents.hidden, function() {
-                log('CLOSE', 'SETTINGS');
-                modal.hide();
-                modal.destroy();
-            });
-            root.on(ModalEvents.cancel, function() {
-                planner.resetModal();
-            });
-            return;
-        }).catch(function(ex) {
-            Log.warn(ex);
-        });
-    },
-
     createCourseSettingsModal: function() {
         const form = loadFragment('lytix_planner', 'new_course_notification_settings_form',
             planner.contextid, null);
@@ -2588,21 +2531,21 @@ const planner = {
         return addEventBtn;
     },
 
-    addNotificationUserSettingsBtn: function() {
-        const userSettingsBtn = document.createElement('button');
-        userSettingsBtn.setAttribute('class', 'btn btn-primary');
-        userSettingsBtn.setAttribute('type', 'button');
-        userSettingsBtn.setAttribute('value', 'notification_user_settings');
-        userSettingsBtn.setAttribute('data-action', 'notification_user_settings');
-        userSettingsBtn.setAttribute('style', 'display: inline-block; margin: 4px 4px 4px 12px; float: right;');
-        const textPresent = planner.strings.open_settings;
-        userSettingsBtn.appendChild(document.createTextNode(textPresent));
-        userSettingsBtn.addEventListener('click', () => {
-            log('OPEN', 'SETTINGS');
-            planner.createUserSettingsModal();
-        });
-        return userSettingsBtn;
-    },
+    // addNotificationUserSettingsBtn: function() {
+    //     const userSettingsBtn = document.createElement('button');
+    //     userSettingsBtn.setAttribute('class', 'btn btn-primary');
+    //     userSettingsBtn.setAttribute('type', 'button');
+    //     userSettingsBtn.setAttribute('value', 'notification_user_settings');
+    //     userSettingsBtn.setAttribute('data-action', 'notification_user_settings');
+    //     userSettingsBtn.setAttribute('style', 'display: inline-block; margin: 4px 4px 4px 12px; float: right;');
+    //     const textPresent = planner.strings.open_settings;
+    //     userSettingsBtn.appendChild(document.createTextNode(textPresent));
+    //     userSettingsBtn.addEventListener('click', () => {
+    //         log('OPEN', 'SETTINGS');
+    //         planner.createUserSettingsModal();
+    //     });
+    //     return userSettingsBtn;
+    // },
 
     addNotificationCourseSettingsBtn: function() {
         const userSettingsBtn = document.createElement('button');
@@ -2683,11 +2626,20 @@ const planner = {
     createMilestoneModal: function(item) {
         const form = loadFragment('lytix_planner', 'new_milestone_form', planner.contextid, item);
         const title = planner.strings.Milestone;
-        ModalFactory.create({
-            type: ModalType,
-            title: title,
-            body: form,
-        }).then(function(modal) {
+        let m;
+        if (Number(M.cfg.version) < 2024042200) {
+            m = ModalFactory.create({
+                type: ModalType,
+                title: title,
+                body: form,
+            });
+        } else {
+            m = ModalType.create({
+                title: title,
+                body: form,
+            });
+        }
+        m.then(function(modal) {
             // Forms are big, we want a big modal.
             modal.setLarge();
             modal.show();
