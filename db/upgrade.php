@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Upgrade changes between versions
  *
@@ -134,5 +135,36 @@ function xmldb_lytix_planner_upgrade($oldversion) {
         // Basic savepoint reached.
         upgrade_plugin_savepoint(true, 2023111500, 'lytix', 'planner');
     }
+
+    if ($oldversion < 2024111100) {
+        global $DB;
+        // Delete deleted users from table 'lytix_planner_milestone'.
+        $DB->delete_records_select('lytix_planner_milestone',
+                'userid IN (SELECT id FROM  {user} WHERE deleted = 1)');
+
+        // Delete non-existing courses from table 'lytix_planner_milestone'.
+        $DB->delete_records_select('lytix_planner_milestone',
+                'courseid NOT IN (SELECT id FROM  {course})');
+
+        // Delete deleted users from table 'lytix_planner_event_comp'.
+        $DB->delete_records_select('lytix_planner_event_comp',
+                'userid IN (SELECT id FROM  {user} WHERE deleted = 1)');
+
+        // Delete non-existing courses from table 'lytix_planner_event_comp'.
+        $DB->delete_records_select('lytix_planner_event_comp',
+                'courseid NOT IN (SELECT id FROM  {course})');
+
+        // Delete non-existing courses from table 'lytix_planner_events'.
+        $DB->delete_records_select('lytix_planner_events',
+                'courseid NOT IN (SELECT id FROM  {course})');
+
+        // Delete non-existing courses from table 'lytix_planner_crs_settings'.
+        $DB->delete_records_select('lytix_planner_crs_settings',
+                'courseid NOT IN (SELECT id FROM  {course})');
+
+        // Coursepolicy savepoint reached.
+        upgrade_plugin_savepoint(true, 2024111100, 'lytix', 'planner');
+    }
+
     return true;
 }

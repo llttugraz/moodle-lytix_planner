@@ -41,7 +41,7 @@ use lytix_helper\dummy;
  * @runTestsInSeparateProcesses
  * @coversDefaultClass \lytix_planner\planner_get
  */
-class planner_get_test extends externallib_advanced_testcase {
+final class planner_get_test extends externallib_advanced_testcase {
     /**
      * Variable for course.
      *
@@ -67,6 +67,7 @@ class planner_get_test extends externallib_advanced_testcase {
      * Setup called before any test case.
      */
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest(true);
         $this->setAdminUser();
         global $CFG;
@@ -109,7 +110,7 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_parameter_exception
      * @throws \restricted_context_exception
      */
-    public function test_empty_planner() {
+    public function test_empty_planner(): void {
         $result = planner_get::service($this->course->id, $this->context->id, false);
         try {
             external_api::clean_returnvalue(planner_get::service_returns(), $result);
@@ -160,7 +161,8 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_event() {
+    public function test_event(): void {
+        global $DB;
         list($eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata) =
             $this->generate_formdata();
 
@@ -216,6 +218,20 @@ class planner_get_test extends externallib_advanced_testcase {
         $this::assertEquals(0, count($deleteevent['items']));
 
         external_api::clean_returnvalue(planner_get::service_returns(), $deleteevent);
+
+        // Update 2024-11-05: This test is extended for cleanup (implemented in local_lytix).
+        $user1 = $this->getDataGenerator()->create_user();
+        $DB->insert_record('lytix_planner_event_comp', ['courseid' => $this->course->id, 'eventid' => 1,
+                'userid' => $user1->id, 'timestamp' => 1]);
+        delete_user($user1, false);
+        $this::assertEquals(0, $DB->count_records('lytix_planner_event_comp', ['userid' => $user1->id]));
+
+        $user2 = $this->getDataGenerator()->create_user();
+        $DB->insert_record('lytix_planner_milestone', ['courseid' => $this->course->id, 'eventid' => 1,
+                'userid' => $user2->id, 'timestamp' => 1, 'startdate' => 1]);
+        delete_user($user2, false);
+        $this::assertEquals(0, $DB->count_records('lytix_planner_milestone', ['userid' => $user2->id]));
+
     }
 
     /**
@@ -230,13 +246,19 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_event_select_other_english() {
+    public function test_event_select_other_english(): void {
+        global $DB;
         list($eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata) =
             $this->generate_formdata(-1, true);
 
         $result = planner_event_lib::planner_event($this->context->id, $formdata);
         external_api::clean_returnvalue(planner_event_lib::planner_event_returns(), $result);
         self::assertIsArray($result);
+
+        // Update 2024-11-05: This test is extended for cleanup (implemented in local_lytix).
+        $this::assertEquals(1, $DB->count_records('lytix_planner_crs_settings'));
+        delete_course($this->course->id, false);
+        $this::assertEquals(0, $DB->count_records('lytix_planner_crs_settings'));
     }
 
     /**
@@ -251,13 +273,19 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_event_select_other_both() {
+    public function test_event_select_other_both(): void {
+        global $DB;
         list($eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata) =
             $this->generate_formdata(-1, true, true);
 
         $result = planner_event_lib::planner_event($this->context->id, $formdata);
         external_api::clean_returnvalue(planner_event_lib::planner_event_returns(), $result);
         self::assertIsArray($result);
+
+        // Update 2024-11-05: This test is extended for cleanup (implemented in local_lytix).
+        $this::assertEquals(1, $DB->count_records('lytix_planner_events'));
+        delete_course($this->course->id, false);
+        $this::assertEquals(0, $DB->count_records('lytix_planner_events'));
     }
 
     /**
@@ -272,7 +300,7 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_event_edit_delete() {
+    public function test_event_edit_delete(): void {
         global $DB;
         // Case add.
         list($eventdate, $eventenddate, $title, $visible, $mandatory, $graded, $formdata) =
@@ -321,7 +349,7 @@ class planner_get_test extends externallib_advanced_testcase {
      * @throws \invalid_response_exception
      * @throws \restricted_context_exception
      */
-    public function test_milestone() {
+    public function test_milestone(): void {
         $milestonedate = new \DateTime('now');
         $milestonedate->setTime($milestonedate->format('G'), $milestonedate->format('i'), 00);
         $milestoneenddate = new \DateTime('now');

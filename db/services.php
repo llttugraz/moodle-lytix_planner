@@ -65,13 +65,6 @@ $functions = [
                 'type'        => 'write',
                 'ajax'        => 'true',
         ],
-        'lytix_planner_store_user_notification_settings'   => [
-                'classname'   => 'lytix_planner\\planner_notifications_lib',
-                'methodname'  => 'store_user_notification_settings',
-                'description' => 'Store the user notification settings.',
-                'type'        => 'write',
-                'ajax'        => 'true',
-        ],
         'lytix_planner_store_custom_course_settings' => [
                 'classname'   => 'lytix_planner\\planner_event_lib',
                 'methodname'  => 'store_custom_course_settings',

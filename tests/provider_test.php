@@ -37,12 +37,13 @@ use dml_exception;
  * Class to test the privacy provider
  * @coversDefaultClass \lytix_planner\privacy\provider
  */
-class provider_test extends provider_testcase {
+final class provider_test extends provider_testcase {
 
     /**
      * Basic setup for these tests.
      */
     public function setUp(): void {
+        parent::setUp();
         $this->resetAfterTest(true);
     }
 
@@ -83,7 +84,7 @@ class provider_test extends provider_testcase {
      * @covers ::get_contexts_for_userid
      *
      */
-    public function test_get_contexts_for_userid() {
+    public function test_get_contexts_for_userid(): void {
         $user = $this->getDataGenerator()->create_user();
         $contextlist = privacy\provider::get_contexts_for_userid($user->id);
         $this->assertEmpty($contextlist);
@@ -96,7 +97,7 @@ class provider_test extends provider_testcase {
      *
      * @return void
      */
-    public function test_get_users_in_context_non_user_context() {
+    public function test_get_users_in_context_non_user_context(): void {
         $context = \context_system::instance();
 
         $userlist = new userlist($context, 'lyitx_planner');
@@ -115,7 +116,7 @@ class provider_test extends provider_testcase {
      * @return void
      * @throws \dml_exception
      **/
-    public function test_delete_user_data() {
+    public function test_delete_user_data(): void {
         $course = $this->getDataGenerator()->create_course();
         $user = $this->getDataGenerator()->create_user();
         $this->getDataGenerator()->enrol_user($user->id, $course->id, 'student');
@@ -135,7 +136,7 @@ class provider_test extends provider_testcase {
      * @return void
      * @throws \dml_exception
      */
-    public function test_delte_user_over_contextlist() {
+    public function test_delte_user_over_contextlist(): void {
         $course = $this->getDataGenerator()->create_course();
         $user = $this->getDataGenerator()->create_user();
         $this->getDataGenerator()->enrol_user($user->id, $course->id);
@@ -153,7 +154,7 @@ class provider_test extends provider_testcase {
      * @return void
      * @throws \dml_exception
      */
-    public function test_erase_users_data() {
+    public function test_erase_users_data(): void {
         $course = $this->getDataGenerator()->create_course();
         $user1 = $this->getDataGenerator()->create_user();
         $user2 = $this->getDataGenerator()->create_user();
@@ -176,7 +177,7 @@ class provider_test extends provider_testcase {
      * @return void
      * @throws \dml_exception
      */
-    public function test_metadata() {
+    public function test_metadata(): void {
         $course = $this->getDataGenerator()->create_course();
         $user = $this->getDataGenerator()->create_user();
         $this->getDataGenerator()->enrol_user($user->id, $course->id);
@@ -194,7 +195,7 @@ class provider_test extends provider_testcase {
      * @return void
      * @throws \dml_exception
      */
-    public function test_export_user_over_contextlist() {
+    public function test_export_user_over_contextlist(): void {
         $course = $this->getDataGenerator()->create_course();
         $user = $this->getDataGenerator()->create_user();
         $this->getDataGenerator()->enrol_user($user->id, $course->id);

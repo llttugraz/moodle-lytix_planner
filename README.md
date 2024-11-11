@@ -12,20 +12,65 @@ it helps students and teachers to plan and organize events.
 
 ## Requirements
 
-- Moodle Version: 4.1+
-- PHP Version: 7.4+
-- Supported Databases: MariaDB, PostgreSQL
-- Supported Moodle Themes: Boost
+## Requirements
+
+- Supported Moodle Version: 4.1 - 4.5
+- Supported PHP Version:    7.4 - 8.3
+- Supported Databases:      MariaDB, PostgreSQL
+- Supported Moodle Themes:  Boost
+
+This plugin has only been tested under the above system requirements against the specified versions.
+However, it may work under other system requirements and versions as well.
 
 ## Features
 
-- Feature 1: View as a student.
-- Feature 2: View as a teacher.
+This plugin helps students and teachers to plan and organize events.
+
+## Configuration
+
+No settings for the subplugin are available.
+
+## Usage
+
+The provided widget of this subplugin is part of the LYTIX operation modes `Learner's Corner` and `Course Dashboard`. We refer to [local_lytix](https://github.com/llttugraz/moodle-local_lytix) for the configuration of this operation modes. If the mode `Learner's Corner` or `Course Dashboard` is active  and if a course is in the list of supported courses for this mode, then this widget is displayed when clicking on `Learner's Corner` \ `Course Dashboard` in the main course view.
+
+## API Documentation
+
+No API.
+
+## Privacy
+
+The following personal data of each user are stored if the functionality of LYTIX for a course is enabled.
+
+- In table `lytix_planner_milestone`:
+
+    | Entry            | Description                  |
+    |------------------|------------------------------|
+    | userid           | The ID of the user           |
+    | courseid         | The ID of the course         |
+    | type             | Type of planner entry        |
+    | marker           | Marker of milestone          |
+    | startdate        | Date of planner entry        |
+    | enddate          | Enddate of milestone         |
+    | title            | Title of planner entry       |
+    | text"            | Text of milestone            |
+    | completed        | Is milestone completed?      |
+
+- In table `lytix_planner_event_comp`:
+
+    | Entry     | Description                         |
+    |-----------|-------------------------------------|
+    | userid    | The ID of the user                  |
+    | courseid  | The ID of the course                |
+    | eventid   | Id of the event                     |
+    | completed | Is event completed?                 |
+    | timestamp | Time the event was marked completed |
+
 
 ## Dependencies
 
 - [local_lytix](https://github.com/llttugraz/moodle-local_lytix)
-- [lytix_config](https://github.com/llttugraz/moodle-lytix_config)
+- [lytix_helper](https://github.com/llttugraz/moodle-lytix_helper)
 - [lytix_logs](https://github.com/llttugraz/moodle-lytix_logs)
 
 ## License
