@@ -12,8 +12,6 @@ it helps students and teachers to plan and organize events.
 
 ## Requirements
 
-## Requirements
-
 - Supported Moodle Version: 4.1 - 4.5
 - Supported PHP Version:    7.4 - 8.3
 - Supported Databases:      MariaDB, PostgreSQL
