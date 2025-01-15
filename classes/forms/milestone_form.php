@@ -108,6 +108,5 @@ class milestone_form extends moodleform {
 
         $mform->addElement('advcheckbox', 'completed', get_string('set_completed', $component));
         $mform->setDefault('completed', $this->_customdata['completed']);
-        $mform->addHelpButton('completed', 'set_completed', $component);
     }
 }

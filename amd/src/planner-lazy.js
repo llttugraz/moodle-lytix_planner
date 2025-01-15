@@ -635,7 +635,7 @@ const planner = {
     },
     addHiddenMonths: function() {
         // Depending on the display type, we may have hidden months on left and right that need to go into the dropdown
-        if (planner.view === 'SEMESTER') {
+        if (planner.view === 'gesamtes Semester' || planner.view === 'entire semester') {
             return;
         }
         const mobile = (window.innerWidth < 767);
@@ -925,7 +925,7 @@ const planner = {
             newElementtext.style.fontWeight = 'normal';
             newElementtext.style.fontFamily = 'sans-serif';
             newElementtext.setAttributeNS(null, 'fill', 'white');
-            if (planner.view === 'SEMESTER') {
+            if (planner.view === 'gesamtes Semester' || planner.view === 'entire semester') {
                 newElementtext.textContent = date.toLocaleString(planner.locale, {year: '2-digit', month: 'short'});
             } else {
                 newElementtext.textContent = date.toLocaleString(planner.locale, {year: 'numeric', month: 'short'});
@@ -2606,7 +2606,7 @@ const planner = {
         const viewAll = document.createElement('a');
         viewAll.setAttribute('class', 'dropdown-item');
         viewAll.setAttribute('href', '#');
-        viewAll.innerText = 'SEMESTER';
+        viewAll.innerText = planner.locale.startsWith('de') ? 'gesamtes Semester' : 'entire semester';
         viewAll.addEventListener('click', () => {
             planner.view = viewAll.innerText;
             drdwnBtn.innerText = planner.view;
