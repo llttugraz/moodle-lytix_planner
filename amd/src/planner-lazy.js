@@ -2183,7 +2183,7 @@ const planner = {
                 document.getElementById('id_' + startdate + '_day').value);
             const timestampofevent = eventDate.getTime();
             if ((timestampofevent / 1000) < (planner.startDate.getTime() / 1000)
-                || (timestampofevent / 1000) > (planner.endDate.getTime / 1000)) {
+                || (timestampofevent / 1000) > (planner.endDate.getTime() / 1000)) {
                 MandatoryFlag = false;
                 e.preventDefault();
                 const timeoutofrange = getString('timeoutofrange', 'lytix_planner');
