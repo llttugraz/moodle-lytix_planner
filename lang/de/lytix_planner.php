@@ -75,8 +75,8 @@ $string['legend'] = '<b>benotete</b> Ereignisse sind unterstrichen, <b>verpflich
 $string['mandatory'] = '<div class="alert alert-warning">Dieses Ereignis ist verpflichtend!!!</div>';
 $string['message'] = 'Nachricht';
 $string['messageprovider:notification_message'] = 'Benachrichtigungsmeldung über Ereignisse und Meilensteine des Planers.';
-$string['month'] = 'MONAT';
-$string['months'] = 'MONATE';
+$string['month'] = 'aktuelles Monat';
+$string['months'] = 'Monate';
 $string['next'] = 'Nächstes Monat';
 $string['no_group'] = 'keine Gruppe';
 $string['none'] = 'keine Benachrichtigungen';
@@ -142,7 +142,6 @@ um an den Kursinhalten dranzubleiben und suche das Gespräch  mit deinen Vortrag
 Hier ist eine Liste der verpassten Meilensteine {$a->missedevents}<br>';
 $string['serial_event'] = 'Serientermin anlegen';
 $string['set_completed'] = 'Wurde dieses Ereignis abgeschlossen?';
-$string['set_completed_help'] = 'Wurde dieses Ereignis abgeschlossen? Wurden alle Punkte erledigt?';
 $string['set_date'] = 'Wählen Sie ein Datum aus:';
 $string['set_date_help'] = 'Wählen Sie ein Datum für dieses Ereignis. Kann bei Deadline gleich wie Enddatum sein.';
 $string['set_delete'] = 'Diesen Meilenstein löschen?';
@@ -170,7 +169,7 @@ $string['set_select_other_english'] = 'Ereignistyp auf Englisch:';
 $string['set_select_other_english_help'] = 'Wie soll das neue Event auf Englisch erscheinen?';
 $string['set_select_other_german'] = 'Ereignistyp auf Deutsch:';
 $string['set_select_other_german_help'] = 'Wie soll das neue Event auf Deutsch erscheinen?';
-$string['set_startdate'] = 'Wählen Sie ein Datum aus:';
+$string['set_startdate'] = 'Startdatum und -zeit:';
 $string['set_startdate_help'] = 'Wählen Sie ein Datum für dieses Ereignis. Kann bei Deadline gleich wie Enddatum sein.';
 $string['set_text'] = 'Beschreibung des Ereignisses:';
 $string['set_text_help'] = 'Schreiben Sie eine etwas detailliertere Beschreibung des Ereignisses in die dafür vorgesehene Box.';
